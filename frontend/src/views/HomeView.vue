@@ -11,7 +11,8 @@
       ></video>
       <div class="content">
         <h1>Le Petit Italia</h1>
-        <p>Bon Appe’tite! A French experience awaits you.</p>
+        <p>Bon Appe’tite! A <br> French <br> experience awaits you.</p>
+        <button>See More</button>
       </div>
     </div>
   </div>
@@ -21,6 +22,7 @@
 export default {};
 </script>
 <style scoped>
+
 .home {
   background-color: black;
 }
@@ -66,6 +68,21 @@ p{
   font-family: "Fraunces", serif;
   color: white;
 }
+button{
+  display: flex;
+   align-items: flex-start; 
+  justify-content: center;
+  margin-left: 190px; 
+  border: 2px white solid ;
+  width: 30%;
+  margin-top: 15%;
+  font-weight: 100;
+  font-size: 25px;
+  background-color: black;
+  color: white;
+  font-family: "Fraunces", serif;
+}
+
 .background-video {
   /* display: flex;
   align-content: flex-start; */
