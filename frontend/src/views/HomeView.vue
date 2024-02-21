@@ -38,7 +38,7 @@ export default {};
   flex-direction: column;
   align-content: center;
   justify-content: flex-start;
-  /* margin-right: auto;*/
+  /* margin-right: auto;
   /* margin-left: 40%;  */
   width: 50%;
   font-family: "Playfair display", serif;
@@ -49,8 +49,8 @@ h1 {
   justify-content: center;
   align-items: flex-start;
   width: 50%;
-  margin-left: 110px; 
-  margin-top: 3%;
+  margin-left: 200px; 
+  margin-top: 8%;
   font-weight: 300;
   font-size: 50px;
   font-family: "Fraunces", serif;
@@ -60,7 +60,7 @@ p{
   display: flex;
    align-items: flex-start; 
   justify-content: center;
-  margin-left: 110px; 
+  margin-left: 200px; 
   width: 50%;
   margin-top: 7%;
   font-weight: 100;
@@ -72,7 +72,7 @@ button{
   display: flex;
    align-items: flex-start; 
   justify-content: center;
-  margin-left: 190px; 
+  margin-left: 274px; 
   border: 2px white solid ;
   width: 30%;
   margin-top: 15%;

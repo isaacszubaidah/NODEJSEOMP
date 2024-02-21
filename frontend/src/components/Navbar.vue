@@ -67,6 +67,6 @@ nav {
   justify-content: center;
   align-items: center;
   margin-right: auto;
-  margin-left: 50%;
+  margin-left: 57%;
 }
 </style>
