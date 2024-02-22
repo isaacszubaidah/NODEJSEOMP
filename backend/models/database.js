@@ -17,14 +17,17 @@ const addProd = async(productName, quantity, productPrice, category, productUrl)
     `,[productName, quantity, productPrice, category, productUrl])
 }
 
-const editProd = async(productName, quantity, productPrice, category, productUrl,id)=>{
+const editProd = async (productName, quantity, productPrice, category, productUrl, id) => {
     const [edit] = await pool.query(`
-    UPDATE products SET productName = ?, 
+    UPDATE products SET 
+    productName = ?, 
     quantity = ?, 
-    productPrice = ? WHERE 
-    (productID = ?);
-    `,[productName, quantity, productPrice, category, productUrl,id])
-    return edit
-}
+    productPrice = ?, 
+    category = ?, 
+    productUrl = ?
+    WHERE (productID = ?);
+    `, [productName, quantity, productPrice, category, productUrl, id]);
+    return edit;
+};
 
 export{addUser, addProd, editProd}
