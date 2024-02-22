@@ -1,4 +1,4 @@
-import {addUser, addProd} from '../models/database.js'
+import {addUser, addProd, editProd} from '../models/database.js'
 import bcrypt from 'bcrypt'
 
 const addOne = async(req,res)=>{
@@ -21,4 +21,13 @@ const prodAdd = async(req,res)=>{
     })
 }
 
-export{addOne, prodAdd}
+const editOne = async (req, res) => {
+    let { productName, quantity, productPrice, category, productUrl } = req.body;
+    const id = req.params.id;
+    await editProd(productName, quantity, productPrice, category, productUrl, id);
+
+    res.json({ success: true });
+};
+
+
+export{addOne, prodAdd, editOne}

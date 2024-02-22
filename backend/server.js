@@ -5,7 +5,7 @@ import mysql from 'mysql2';
 import bcrypt from 'bcrypt';
 import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
-import { addOne, prodAdd } from './controller/controller.js';
+import { addOne, editOne, prodAdd } from './controller/controller.js';
 config() 
 
 const pool = mysql.createPool({
@@ -34,6 +34,8 @@ app.use(cookieParser())
 app.post('/users',addOne)
 
 app.post('/products',prodAdd)
+
+app.patch('/products/:id',editOne)
  
 app.listen(PORT,()=>{
     console.log(`It is running on http://localhost:${PORT}`);
