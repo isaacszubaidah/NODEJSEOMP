@@ -67,9 +67,6 @@ h1 {
   color: white;
 }
 p {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
   margin-left: 200px;
   width: 50%;
   margin-top: 7%;
