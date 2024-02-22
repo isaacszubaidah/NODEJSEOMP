@@ -1,17 +1,23 @@
 <template>
+  <Navbar />
   <div class="home">
     <div class="something">
-      <video
-        class="background-video"
-        autoplay
-        loop
-        muted
-        src="https://i.imgur.com/FhXCT0j.mp4"
-        type="video/mp4"
-      ></video>
+      <div class="background-video">
+        <video
+          autoplay
+          loop
+          muted
+          src="https://i.imgur.com/FhXCT0j.mp4"
+          type="video/mp4"
+        ></video>
+      </div>
       <div class="content">
         <h1>Le Petit Italia</h1>
-        <p>Bon Appe’tite! A <br> French <br> experience awaits you.</p>
+        <p>
+          Bon Appe’tite! A <br />
+          French <br />
+          experience awaits you.
+        </p>
         <button>See More</button>
       </div>
     </div>
@@ -19,10 +25,14 @@
 </template>
 
 <script>
-export default {};
+import Navbar from "@/components/Navbar.vue";
+export default {
+  components: {
+    Navbar,
+  },
+};
 </script>
 <style scoped>
-
 .home {
   background-color: black;
 }
@@ -49,18 +59,18 @@ h1 {
   justify-content: center;
   align-items: flex-start;
   width: 50%;
-  margin-left: 200px; 
+  margin-left: 200px;
   margin-top: 8%;
   font-weight: 300;
   font-size: 50px;
   font-family: "Fraunces", serif;
   color: white;
 }
-p{
+p {
   display: flex;
-   align-items: flex-start; 
+  align-items: flex-start;
   justify-content: center;
-  margin-left: 200px; 
+  margin-left: 200px;
   width: 50%;
   margin-top: 7%;
   font-weight: 100;
@@ -68,12 +78,12 @@ p{
   font-family: "Fraunces", serif;
   color: white;
 }
-button{
+button {
   display: flex;
-   align-items: flex-start; 
+  align-items: flex-start;
   justify-content: center;
-  margin-left: 274px; 
-  border: 2px white solid ;
+  margin-left: 274px;
+  border: 2px white solid;
   width: 30%;
   margin-top: 15%;
   font-weight: 100;
@@ -86,10 +96,16 @@ button{
 .background-video {
   /* display: flex;
   align-content: flex-start; */
-  align-self: self-start;
-  bottom: 0;
-  height: 40%;
+  /* align-self: self-start; */
+  /* height: 40%; */
   width: 50%;
-  margin-top: -100px;
+  margin-top: -600px;
+  overflow-y: none;
+}
+
+.background-video video {
+  height: 1400px;
+  width: 100%;
+  top: 0;
 }
 </style>

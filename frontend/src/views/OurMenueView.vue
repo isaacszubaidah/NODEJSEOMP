@@ -1,10 +1,13 @@
 <template>
-  
+  <navbar/>
 </template>
 
 <script>
-export default {
-
+import navbar from '@/components/nav.vue'
+export default{
+  components:{
+    navbar
+  },
 }
 </script>
 
