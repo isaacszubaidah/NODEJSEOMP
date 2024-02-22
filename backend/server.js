@@ -2,9 +2,10 @@ import express from 'express';
 import { config } from 'dotenv';
 import cors from 'cors';
 import mysql from 'mysql2';
-import bcrypt, {hash} from 'bcrypt';
+import bcrypt from 'bcrypt';
 import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
+import { addOne, prodAdd } from './controller/controller.js';
 config() 
 
 const pool = mysql.createPool({
@@ -26,4 +27,14 @@ app.use(cors({
 
 app.use(express.json())
 
+app.use(express.static('public'))
+
 app.use(cookieParser())
+
+app.post('/users',addOne)
+
+app.post('/products',prodAdd)
+ 
+app.listen(PORT,()=>{
+    console.log(`It is running on http://localhost:${PORT}`);
+}); 
