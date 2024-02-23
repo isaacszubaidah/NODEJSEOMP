@@ -1,7 +1,7 @@
 import {pool} from '../config/config.js'
 
-import { config } from 'dotenv';
-config()
+// import { config } from 'dotenv';
+// config()
 
 const addUser = async(firstName, lastName, userAge, userGender, emailAdd, userPass, userProfile)=>{
     await pool.query(`
@@ -10,11 +10,55 @@ const addUser = async(firstName, lastName, userAge, userGender, emailAdd, userPa
     `,[firstName, lastName, userAge, userGender, emailAdd, userPass, userProfile])
 }
 
+const getUsers = async (req,res)=>{
+    const [users] = await pool.query(`
+    SELECT * 
+    FROM users
+    `)
+    return users
+}
+const getUser = async (userID)=>{
+    const [user] = await pool.query(`
+    SELECT * 
+    FROM users WHERE userID = ?
+    `,[userID])
+    return user
+}
+
+const editUser = async(firstName, lastName, userAge, userGender, emailAdd, userProfile, userID)=>{
+    const [editedUser] = await pool.query(`
+    UPDATE users SET 
+    firstName = ?, 
+    lastName = ?, 
+    userAge = ?,  
+    userGender = ?, 
+    emailAdd = ?, 
+    userProfile = ?
+    WHERE (userID = ?)`,[firstName, lastName, userAge, userGender, emailAdd, userProfile, userID])
+    return editedUser
+}
+
 const addProd = async(productName, quantity, productPrice, category, productUrl)=>{
     await pool.query(`
     INSERT INTO products (productName, quantity, productPrice, category, productUrl)
      VALUES (?, ?, ?, ?,?);
     `,[productName, quantity, productPrice, category, productUrl])
+}
+
+const getProds = async(req,res)=>{
+    const [products] = await pool.query(`
+    SELECT * 
+    FROM products
+    `)
+    return products
+}
+
+const getProd = async(productID)=>{
+    const [product] = await pool.query(`
+    SELECT * 
+    FROM products WHERE productID = ?
+    `,[productID])
+    return product
 }
 
 const editProd = async (productName, quantity, productPrice, category, productUrl, id) => {
@@ -30,4 +74,4 @@ const editProd = async (productName, quantity, productPrice, category, productUr
     return edit;
 };
 
-export{addUser, addProd, editProd}
+export{addUser, getUsers, getUser, addProd,getProds,getProd, editProd, editUser}

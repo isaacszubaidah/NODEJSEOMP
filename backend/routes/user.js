@@ -1,11 +1,22 @@
 import express from 'express';
 
-import controller from '../controller/controller';
+import {addOne,getAll,eUser,prodAdd,editOne, getOne, getProdss, getPr1} from '../controller/controller.js';
 
 const router = express.Router()
 
-router.route('/users').post(controller.addOne);
+router.route('/users').post(addOne)
+        
+router.route('/users').get(getAll);
 
-router.route('/products').post(controller.prodAdd)
+router.route('/users/:userID').get(getOne)
 
-router.route('/products/:id').patch(controller.editOne)
+router.route('/users/:userID').patch(eUser)
+
+router.route('/products').post(prodAdd)
+
+router.route('/products').get(getProdss)
+
+router.route('/products/:prodID').patch(editOne)
+router.route('/products/:prodID').get(getPr1)
+
+export default router

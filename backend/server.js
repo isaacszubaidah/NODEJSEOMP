@@ -5,7 +5,8 @@ import mysql from 'mysql2';
 import bcrypt from 'bcrypt';
 import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
-import { addOne, editOne, prodAdd } from './controller/controller.js';
+import { addOne, eUser, editOne, getAll, getOne, prodAdd } from './controller/controller.js';
+import UserRouter from './routes/user.js'
 config() 
 
 const pool = mysql.createPool({
@@ -14,6 +15,7 @@ const pool = mysql.createPool({
     password:process.env.PASSWORD,
     database:process.env.DATABASE
 }).promise()
+
 
 const PORT = process.env.PORT;
 
@@ -31,12 +33,8 @@ app.use(express.static('public'))
 
 app.use(cookieParser())
 
-app.post('/users',addOne)
+app.use(UserRouter) 
 
-app.post('/products',prodAdd)
-
-app.patch('/products/:id',editOne)
- 
 app.listen(PORT,()=>{
     console.log(`It is running on http://localhost:${PORT}`);
 }); 
