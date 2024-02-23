@@ -1,5 +1,6 @@
 <template>
   <navbar/>
+<h1>Reserved</h1>
 </template>
 
 <script>

@@ -18,7 +18,7 @@
           French <br />
           experience awaits you.
         </p>
-        <button>See More</button>
+        <button><a href="/menue">See More</a></button>
       </div>
     </div>
   </div>
@@ -83,9 +83,12 @@ button {
   border: 2px white solid;
   width: 30%;
   margin-top: 15%;
+  background-color: black;
+}
+a {
+  text-decoration: none;
   font-weight: 100;
   font-size: 25px;
-  background-color: black;
   color: white;
   font-family: "Fraunces", serif;
 }

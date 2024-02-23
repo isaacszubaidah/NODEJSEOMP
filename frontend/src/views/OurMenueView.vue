@@ -1,5 +1,6 @@
 <template>
   <navbar/>
+  <h1>Menue</h1>
 </template>
 
 <script>
