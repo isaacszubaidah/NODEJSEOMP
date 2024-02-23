@@ -1,4 +1,4 @@
-import {addUser, addProd, editProd} from '../models/database.js'
+import {addUser, getUsers, getUser, addProd, editProd, editUser, getProds, getProd} from '../models/database.js'
 import bcrypt from 'bcrypt'
 
 const addOne = async(req,res)=>{
@@ -12,6 +12,28 @@ const addOne = async(req,res)=>{
     }) 
 }
 
+const getAll = async(req,res)=>{
+    res.send(await getUsers())
+}
+
+const getOne = async(req,res)=>{
+    res.send(await getUser(+req.params.userID))
+}
+
+const eUser = async(req,res)=>{
+    let {firstName, lastName, userAge, userGender, emailAdd, userProfile} = req.body
+    const [user] = await getUser(+req.params.userID)
+    firstName ? firstName=firstName: {firstName}=user,
+    lastName ? lastName=lastName: {lastName}=user,
+    userAge ? userAge=userAge: {userAge}=user,
+    userGender ? userGender=userGender: {userGender}=user,
+    emailAdd ? emailAdd=emailAdd: {emailAdd}=user,
+    userProfile ? userProfile=userProfile: {userProfile}=user
+    console.log(user);
+    await editUser(firstName, lastName, userAge, userGender, emailAdd, userProfile, +req.params.userID)
+    res.json(await getUsers()) 
+}
+
 const prodAdd = async(req,res)=>{
     const{productName, quantity, productPrice, category, productUrl} = req.body
     console.log(req.body);
@@ -21,13 +43,27 @@ const prodAdd = async(req,res)=>{
     })
 }
 
+const getProdss = async (req, res) => {
+    const products = await getProds();
+    res.send(products);
+}
+
+const getPr1 = async(req,res)=>{
+    res.send(await getProd(+req.params.prodID))
+}
+
+
 const editOne = async (req, res) => {
-    let { productName, quantity, productPrice, category, productUrl } = req.body;
+    const { productName, quantity, productPrice, category, productUrl } = req.body;
+    productName ? productName=productName: {productName}=product.productName
+    quantity ? quantity=quantity: {quantity}=product.quantity
+    productPrice ? productPrice=productPrice: {productPrice}=product.productPrice
+    category ? category=category: {category}=product.category
+    productUrl ? productUrl=productUrl: {productUrl}=product.productUrl
     const id = req.params.id;
     await editProd(productName, quantity, productPrice, category, productUrl, id);
-
     res.json({ success: true });
 };
 
 
-export{addOne, prodAdd, editOne}
+export{addOne, getAll, getOne, eUser, prodAdd, editOne, getProdss,getPr1}
