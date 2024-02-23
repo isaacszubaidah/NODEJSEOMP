@@ -49,7 +49,7 @@
               class="nav-link active"
               aria-curent="page"
               to="/contact"
-              >Contact</router-link
+              >Contact  |</router-link
             >
           </li>
         </ul>

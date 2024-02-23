@@ -60,7 +60,7 @@
           </div>
         </form>
       </div>
-      <div class="col-6 columnA">
+      <div class="col-6 columnB">
         <span class="subhead">Find Us?</span>
 
         <div class="row iconRow">
@@ -77,7 +77,7 @@
         </div>
         <div class="row iconRow">
           <div class="col-3">
-            <p><i class="fa fa-mobile fa-2x"></i></p>
+            <p><i class="fa-solid fa-mobile-screen fa-2x"></i></p>
           </div>
           <div class="col-9"><p class="num">+3883642465</p></div>
         </div>
@@ -223,7 +223,13 @@ p {
 }
 
 .columnA {
-  height: 300px;
+  padding-top: 58px;
+  height: 500px;
+  width: 400px;
+}
+.columnB {
+  padding-bottom: 49px;
+  height: 500px;
   width: 400px;
 }
 
