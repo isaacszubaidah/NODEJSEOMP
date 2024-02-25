@@ -37,7 +37,7 @@ export default {
 
 <style scoped>
 .row {
-  margin-top: 3%;
+   margin-top: 10%;
 }
 h2 {
   margin-left: 100px;
@@ -45,6 +45,7 @@ h2 {
   color: black;
 }
 .about {
+  overflow: hidden;
   width: 50%;
 }
 .img {
