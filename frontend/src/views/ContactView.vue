@@ -152,6 +152,10 @@ export default {
 </script>
 
 <style scoped>
+.contact{
+  overflow: hidden;
+  margin-top: 7%;
+}
 .loader {
   width: 20px;
   height: 20px;
