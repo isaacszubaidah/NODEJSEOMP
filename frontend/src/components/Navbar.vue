@@ -60,6 +60,9 @@ export default {
 </script>
 
 <style scoped>
+* {
+  font-family: 'Alegreya", serif';
+}
 span {
   color: white;
 }
@@ -78,6 +81,7 @@ span {
   top: 0;
   padding-left: 16px;
   padding-right: 16px;
+  z-index: 99;
 }
 
 .menu-toggle {
