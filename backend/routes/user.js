@@ -1,6 +1,6 @@
 import express from 'express';
 
-import {addOne,getAll,eUser,prodAdd,editOne, getOne, getProdss, getPr1, delOne, delProd} from '../controller/controller.js';
+import {addOne,getAll,eUser,prodAdd,editOne, getOne, getProdss, getPr1, delOne, delProd, authenticate} from '../controller/controller.js';
 
 const router = express.Router()
 
@@ -21,5 +21,7 @@ router.route('/products').get(getProdss)
 router.route('/products/:productID').patch(editOne)
 router.route('/products/:productID').get(getPr1)
 router.route('/products/:productID').delete(delProd)
+
+router.route('/login').post(authenticate)
 
 export default router

@@ -1,5 +1,6 @@
 import {addUser, getUsers, getUser, addProd, editProd, editUser, getProds, getProd, delUser, delProduct} from '../models/database.js'
 import bcrypt from 'bcrypt'
+import { valFun } from '../middleware/middleware.js'
 
 const addOne = async(req,res)=>{
     const{firstName, lastName, userAge, userGender, emailAdd, userPass, userProfile} = req.body
@@ -75,5 +76,16 @@ const delProd = async (req,res)=>{
     res.send(await getProds())
 }
 
+const authenticate = (req,res,next)=>{
+    let {cookie} = req.headers
+    let tokenInHeader = cookie && cookie.split('=')[1]
+    if(tokenInHeader===null) res.sendStatus(401)
+    jwt.verify(tokenInHeader,process.env.SECRET_KEY,(err,user)=>{
+        if(err) return res.sendStatus(403)
+        req.user = user
+    next()
+    })
+}
 
-export{addOne, getAll, getOne, eUser, prodAdd, editOne, getProdss,getPr1,delOne,delProd}
+
+export{addOne, getAll, getOne, eUser, prodAdd, editOne, getProdss,getPr1,delOne,delProd,authenticate}
