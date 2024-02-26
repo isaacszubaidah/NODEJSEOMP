@@ -153,12 +153,14 @@ a {
     margin-top: 8%;
     font-weight: 300;
     font-size: 50px;
+    width: 100%;
     font-family: "Fraunces", serif;
     color: white;
   }
   p {
     margin-top: 7%;
     margin-left: 0;
+    width: 100%;
     font-weight: 100;
     font-size: 30px;
     font-family: "Fraunces", serif;
@@ -167,12 +169,13 @@ a {
   button {
     display: flex;
     margin-left: 0;
+    width: 60%;
     align-items: flex-start;
     justify-content: center;
     border: 2px white solid;
     margin-top: 15%;
     background-color: black;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
   }
 }
 </style>
