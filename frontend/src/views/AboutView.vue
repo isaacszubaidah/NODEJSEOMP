@@ -1,6 +1,6 @@
 <template>
-  <navbar/>
   <div class="row">
+    <navbar/>
     <div class="about col-6">
       <h2>Good Food Alley</h2>
       <p>

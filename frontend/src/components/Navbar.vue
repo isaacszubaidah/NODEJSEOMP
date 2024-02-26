@@ -53,6 +53,14 @@
             <router-link
               class="nav-link active"
               aria-curent="page"
+              to="/admin"
+              >  Admin |
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link active"
+              aria-curent="page"
               to="/contact"
               >Contact  |</router-link
             >

@@ -1,6 +1,6 @@
 <template>
-  <navbar />
   <div class="vh-100">
+    <navbar />
     <div class="contact">
       <div>
         <h1 class="header">Keep In Touch</h1>
