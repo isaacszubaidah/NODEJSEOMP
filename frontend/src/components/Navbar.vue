@@ -32,29 +32,44 @@
             </router-link>
           </li>
           <li class="nav-item dropdown">
-          <router-link class="nav-link active dropdown-toggle" to="/menue" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Our Menue
-          </router-link >
-          <ul class="dropdown-menu bg-light">
-            <li><router-link class="dropdown-item " to="/menue">Starters</router-link></li>
-            <li><router-link class="dropdown-item " to="/menue">Main</router-link></li>
-            <li><router-link class="dropdown-item " to="/menue">Dessert</router-link></li>
-          </ul>
-        </li>
-          <li class="nav-item">
             <router-link
-              class="nav-link active"
-              aria-curent="page"
-              to="/reservation"
-              >|  Reservations |
+              class="nav-link active dropdown-toggle"
+              to="/menue"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Our Menue
             </router-link>
+            <ul class="dropdown-menu bg-light">
+              <li>
+                <router-link class="dropdown-item" to="/menue"
+                  >Starters</router-link
+                >
+              </li>
+              <li>
+                <router-link class="dropdown-item" to="/menue"
+                  >Main</router-link
+                >
+              </li>
+              <li>
+                <router-link class="dropdown-item" to="/menue"
+                  >Dessert</router-link
+                >
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <router-link
               class="nav-link active"
               aria-curent="page"
-              to="/admin"
-              >  Admin |
+              to="/reservation"
+              >| Reservations |
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link active" aria-curent="page" to="/admin">
+              Admin |
             </router-link>
           </li>
           <li class="nav-item">
@@ -62,7 +77,7 @@
               class="nav-link active"
               aria-curent="page"
               to="/contact"
-              >Contact  |</router-link
+              >Contact |</router-link
             >
           </li>
         </ul>
