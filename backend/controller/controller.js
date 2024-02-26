@@ -1,4 +1,4 @@
-import {addUser, getUsers, getUser, addProd, editProd, editUser, getProds, getProd} from '../models/database.js'
+import {addUser, getUsers, getUser, addProd, editProd, editUser, getProds, getProd, delUser, delProduct} from '../models/database.js'
 import bcrypt from 'bcrypt'
 
 const addOne = async(req,res)=>{
@@ -49,7 +49,7 @@ const getProdss = async (req, res) => {
 }
 
 const getPr1 = async(req,res)=>{
-    res.send(await getProd(+req.params.prodID))
+    res.send(await getProd(+req.params.productID))
 }
 
 
@@ -65,5 +65,15 @@ const editOne = async (req, res) => {
     res.json({ success: true });
 };
 
+const delOne = async (req,res)=>{
+    await delUser(+req.params.userID)
+    res.send(await getUsers())
+}
 
-export{addOne, getAll, getOne, eUser, prodAdd, editOne, getProdss,getPr1}
+const delProd = async (req,res)=>{
+    await delProduct(+req.params.productID)
+    res.send(await getProds())
+}
+
+
+export{addOne, getAll, getOne, eUser, prodAdd, editOne, getProdss,getPr1,delOne,delProd}

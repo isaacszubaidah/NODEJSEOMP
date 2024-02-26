@@ -74,4 +74,21 @@ const editProd = async (productName, quantity, productPrice, category, productUr
     return edit;
 };
 
-export{addUser, getUsers, getUser, addProd,getProds,getProd, editProd, editUser}
+const delUser = async(userID)=>{
+    const [result] = await pool.query(`
+    DELETE FROM users
+    WHERE userID = ?  
+    `,[userID])
+    return result
+}
+
+const delProduct = async(productID)=>{
+    const [result] = await pool.query(`
+    DELETE FROM products
+    WHERE productID = ?   
+    `,[productID])
+    return result
+}
+
+
+export{addUser, getUsers, getUser, addProd,getProds,getProd, editProd, editUser, delUser, delProduct}
