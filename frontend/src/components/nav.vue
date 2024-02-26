@@ -67,6 +67,14 @@
             <router-link
               class="nav-link active"
               aria-curent="page"
+              to="/admin"
+              > Admin |</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link active"
+              aria-curent="page"
               to="/contact"
               >Contact |</router-link
             >
@@ -84,7 +92,7 @@ export default {};
 <style scoped>
 nav {
   z-index: 60;
-  position: fixed;
+  position: absolute;
   right: 0;
   left: 0;
   top: 0;

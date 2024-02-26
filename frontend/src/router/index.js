@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import OurMenueView from '../views/OurMenueView.vue'
 import ReservationView from '../views/ReservationView.vue'
+import AdminView from '../views/AdminView.vue'
 import ContactView from '../views/ContactView.vue'
 
 const routes = [
@@ -25,6 +26,11 @@ const routes = [
     path: '/reservation',
     name: 'reservation',
     component:ReservationView
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component:AdminView
   },
   {
     path: '/contact',

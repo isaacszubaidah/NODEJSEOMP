@@ -1,7 +1,8 @@
 <template>
-  <Navbar />
   <div class="home">
-    <div class="something">
+    <Navbar v-if="!loading" />
+    <spinner v-if="loading"/>
+    <div class="something" v-else>
       <div class="background-video">
         <video
           autoplay
@@ -26,10 +27,23 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import spinner from "@/components/Spinner.vue"
 export default {
+  name:'home',
   components: {
     Navbar,
+    spinner,
   },
+  data(){
+    return{
+      loading:true,
+    };
+  },
+  mounted(){
+    setTimeout(() =>{
+      this.loading = false;
+    },3000);
+  }
 };
 </script>
 <style scoped>
