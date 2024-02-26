@@ -80,7 +80,7 @@ export default {
   align-items: center;
   flex-direction: column;
   height: 100%;
-  margin-top: auto;
+  margin-top: 10%;
   margin-bottom: auto;
 }
 
