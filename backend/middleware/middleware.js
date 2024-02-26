@@ -1,22 +1,12 @@
-import { checkUser } from "../models/database.js";
-
-const valFun = async(req,res,next)=>{
-    const {userProfile, userPass} = req.body
-    const hashedPassword = await checkUser(username)
-    bcrypt.compare(userPass,hashedPassword,(err,result)=>{
-        if(err) throw err
-        if(result === true){
-            const {userProfile} = req.body
-            const token = jwt.sign({userProfile:userProfile},process.env.SECRET_KEY,{expiresIn:'1h'})
-            res.send({
-                token:token,
-                msg: "YAY! You have logged in."
-            })
-            next()
-        } else
-        res.send({
-            msg:"The password or username is inocorrect"})
+const validate = (req,res,next)=>{
+    let {cookie} = req.headers
+    let tokenInHeader = cookie && cookie.split('=')[1]
+    if(tokenInHeader===null) res.sendStatus(401)
+    jwt.verify(tokenInHeader,process.env.SECRET_KEY,(err,user)=>{
+        if(err) return res.sendStatus(403)
+        req.user = user
+    next()
     })
 }
 
-export{valFun}
+export{validate}

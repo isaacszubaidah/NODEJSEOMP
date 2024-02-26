@@ -5,9 +5,8 @@ import mysql from 'mysql2';
 import bcrypt from 'bcrypt';
 import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
-import { addOne, eUser, editOne, getAll, getOne, prodAdd, authenticate } from './controller/controller.js';
+import { addOne, eUser, editOne, getAll, getOne, prodAdd} from './controller/controller.js';
 import UserRouter from './routes/user.js'
-import { valFun } from './middleware/middleware.js';
 config() 
 
 const pool = mysql.createPool({
@@ -22,11 +21,7 @@ const PORT = process.env.PORT;
 
 const app = express()
 
-app.use(cors({
-    origin:'byezi4481zkbqe5dwtxz-mysql.services.clever-cloud.com',
-    credentials:true
-}
-))
+app.use(cors({}))
 
 app.use(express.json())
 
@@ -36,13 +31,12 @@ app.use(cookieParser())
 
 app.use(UserRouter) 
 
-app.post('/login', valFun,(req,res)=>{
+app.post('/login',(req,res)=>{
     res.send({
         msg: "YAY! You have logged in."
     })
 })
 
-app.use('/login', authenticate)
 
 app.listen(PORT,()=>{
     console.log(`It is running on http://localhost:${PORT}`);
