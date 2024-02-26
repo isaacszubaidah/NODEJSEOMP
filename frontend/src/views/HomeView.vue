@@ -135,6 +135,10 @@ a {
   .background-video video {
     width: 400px;
   }
+
+  .content{
+      margin-top: 0%;
+  }
   .something {
     display: flex;
     max-width: 1220px;
