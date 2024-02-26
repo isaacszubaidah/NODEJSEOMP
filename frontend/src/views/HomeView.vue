@@ -1,25 +1,27 @@
 <template>
-  <div class="home">
-    <!-- <Navbar v-if="!loading" /> -->
-    <spinner v-if="loading" />
-    <div class="something" v-else>
-      <div class="background-video">
-        <video
-          autoplay
-          loop
-          muted
-          src="https://i.imgur.com/FhXCT0j.mp4"
-          type="video/mp4"
-        ></video>
-      </div>
-      <div class="content">
-        <h1>Le Petit Italia</h1>
-        <p>
-          Bon Appe’tite! A <br />
-          French <br />
-          experience awaits you.
-        </p>
-        <button><a href="/menue">See More</a></button>
+  <div>
+    <div class="home">
+      <Navbar v-if="!loading" />
+      <spinner v-if="loading" />
+      <div class="something" v-else>
+        <div class="background-video">
+          <video
+            autoplay
+            loop
+            muted
+            src="https://i.imgur.com/FhXCT0j.mp4"
+            type="video/mp4"
+          ></video>
+        </div>
+        <div class="content">
+          <h1>Le Petit Italia</h1>
+          <p>
+            Bon Appe’tite! A <br />
+            French <br />
+            experience awaits you.
+          </p>
+          <button><a href="/menue">See More</a></button>
+        </div>
       </div>
     </div>
   </div>
@@ -52,6 +54,8 @@ export default {
   height: 100vh;
   display: flex;
   align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
 
 .something {
@@ -65,6 +69,9 @@ export default {
 }
 .background-video {
   width: 100%;
+}
+.background-video video {
+  /* width: 100%; */
 }
 .content {
   width: 100%;
@@ -115,8 +122,9 @@ a {
   font-family: "Fraunces", serif;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 1060px) {
   .home {
+    padding-top: 10px;
     background-color: black;
     height: 100%;
     display: flex;
