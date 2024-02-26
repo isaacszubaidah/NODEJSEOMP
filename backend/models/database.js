@@ -1,5 +1,7 @@
 import {pool} from '../config/config.js'
 
+import { valFun } from '../middleware/middleware.js'
+
 // import { config } from 'dotenv';
 // config()
 
@@ -90,5 +92,16 @@ const delProduct = async(productID)=>{
     return result
 }
 
+const checkUser = async(userProfile)=>{
+    const [[{userPass}]] = await pool.query(`
+    SELECT userPass
+    FROM users
+    WHERE userPass = ?
+    `,[userProfile])
+    return userPass
+}
 
-export{addUser, getUsers, getUser, addProd,getProds,getProd, editProd, editUser, delUser, delProduct}
+
+
+
+export{addUser, getUsers, getUser, addProd,getProds,getProd, editProd, editUser, delUser, delProduct, checkUser}
