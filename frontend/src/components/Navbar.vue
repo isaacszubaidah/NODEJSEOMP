@@ -66,12 +66,18 @@ span {
 .navbar {
   display: flex;
   width: 100%;
-  max-width: 1220px;
+  max-width: 1440px;
   margin-right: auto;
   margin-left: auto;
   justify-content: space-between;
   align-items: center;
   height: 80px;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .menu-toggle {

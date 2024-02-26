@@ -71,7 +71,8 @@ export default {
   width: 100%;
 }
 .background-video video {
-  /* width: 100%; */
+  width: 100%;
+  height: 100vh;
 }
 .content {
   width: 100%;
