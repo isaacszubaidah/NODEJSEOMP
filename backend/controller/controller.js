@@ -1,6 +1,6 @@
-import {addUser, getUsers, getUser, addProd, editProd, editUser, getProds, getProd, delUser, delProduct} from '../models/database.js'
+import {addUser, getUsers, getUser, addProd, editProd, editUser, getProds, getProd, delUser, delProduct, checkUser} from '../models/database.js'
 import bcrypt from 'bcrypt'
-import { valFun } from '../middleware/middleware.js'
+import { validate } from '../middleware/middleware.js'
 
 const addOne = async(req,res)=>{
     const{firstName, lastName, userAge, userGender, emailAdd, userPass, userProfile} = req.body
@@ -76,16 +76,43 @@ const delProd = async (req,res)=>{
     res.send(await getProds())
 }
 
-const authenticate = (req,res,next)=>{
-    let {cookie} = req.headers
-    let tokenInHeader = cookie && cookie.split('=')[1]
-    if(tokenInHeader===null) res.sendStatus(401)
-    jwt.verify(tokenInHeader,process.env.SECRET_KEY,(err,user)=>{
-        if(err) return res.sendStatus(403)
-        req.user = user
-    next()
-    })
-}
+const valFun = async (req, res, validate) => {
+    try {
+        const { userPass, userProfile } = req.body;
+        if (!userPass || typeof userPass !== 'string') {
+            throw new Error('Invalid password');
+        }
+
+        const hashedPassword = await checkUser(userPass);
+        if (!hashedPassword) {
+            throw new Error('Invalid hashed password');
+        }
+
+        bcrypt.compare(userPass, hashedPassword, (err, result) => {
+            if (err) {
+                throw err;
+            }
+            if (result === true) {
+                const token = jwt.sign({ userProfile: userProfile }, process.env.SECRET_KEY, { expiresIn: '1h' });
+                res.cookie('jwt', token, { httpOnly: false });
+                res.send({
+                    token: token,
+                    msg: "YAY! You have logged in."
+                });
+                validate();
+            } else {
+                res.send({
+                    msg: "The password or username is incorrect"
+                });
+            }
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({
+            msg: "An error occurred"
+        });
+    }
+};
 
 
-export{addOne, getAll, getOne, eUser, prodAdd, editOne, getProdss,getPr1,delOne,delProd,authenticate}
+export{addOne, getAll, getOne, eUser, prodAdd, editOne, getProdss,getPr1,delOne,delProd, valFun}
