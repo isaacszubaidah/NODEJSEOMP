@@ -1,17 +1,15 @@
 <template>
-  <!-- <Navbar/> -->
-  <router-view/>
+  <router-view />
+  <Footer />
 </template>
 
 <script>
-
-// import Navbar from '@/components/Navbar.vue'
-// export default{
-//   components:{
-//     Navbar,
-//   }
-
-
+import Footer from "@/components/Footer.vue";
+export default {
+  components: {
+    Footer,
+  },
+};
 </script>
 
 <style>
@@ -38,15 +36,56 @@ nav a.router-link-exact-active {
 } */
 
 nav a.router-link-exact-active {
-    font-size: 18px;
-    gap: 20px;
-    font-family: 'Alegreya", serif';
-    color: white;
+  font-size: 18px;
+  gap: 20px;
+  font-family: 'Alegreya", serif';
+  color: white;
 }
 
-.logo{
+.logo {
   width: 90px;
-  height:70px;
+  height: 70px;
   border-radius: 90px;
+}
+footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  position: fixed;
+  margin-top: 10px;
+  bottom: 0;
+  background-color:rgb(20, 19, 19);
+}
+
+.para {
+  font-family: "Alegreya", serif;
+  font-size: 20px;
+  font-weight: semi-bold;
+  color: white;
+  display: flex;
+  margin-left: 20px;
+}
+.para2 {
+  font-family: "Alegreya", serif;
+  font-size: 20px;
+  font-weight: semi-bold;
+  color: white;
+  display: flex;
+  margin-right: 20px;
+}
+@media screen and (max-width: 480px){
+  footer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    position: fixed;
+    margin-top: 10px;
+    bottom: 0;
+    background-color: #DEB887;
+}
 }
 </style>

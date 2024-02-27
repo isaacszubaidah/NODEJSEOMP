@@ -1,5 +1,5 @@
 <template>
-  <div class="menue-container">
+  <div class="menue-container vh-100">
     <navbar />
     <!-- {{products}} -->
     <div class="products">
