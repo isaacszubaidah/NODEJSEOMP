@@ -1,56 +1,137 @@
 <template>
-<div class="row">
-    <div class="col-4 card-container">
-        <div class="card">
-            <img :src="product.productUrl" class="card-img-top" alt="">
-            <div class="card-body">
-            <h5 class="card-title">{{ product.productID }}</h5>
-            <p class="card-text">{{ product.productName }}</p>
-          </div>
-
-        </div>
-
-    </div>
-
+  <div>
+  <h2>Products</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Product ID</th>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Product Image</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="product in getProducts" :key="product.id">
+              <td>{{ product.productID }}</td>
+              <td>{{ product.productName }}</td>
+              <td>{{ product.quantity }}</td>
+              <td>R{{ product.productPrice }}</td>
+              <td>{{ product.category }}</td>
+              <td><img :src="product.productUrl"></td>
+              <td>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" :id="'editModal' + product.productID">
+                  Edit
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Edit Product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <input type="text" v-model="product.productName" placeholder="Product Name">
+                        <input type="text" v-model="product.quantity" placeholder="Quantity">
+                        <input type="text" v-model="product.productPrice" placeholder="Product Price">
+                        <input type="text" v-model="product.category" placeholder="Category">
+                        <input type="text" v-model="product.productUrl" placeholder="Image URL">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" @click="updateProduct(product)">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td><button type="button" class="btn btn-dark" @click="delProduct(product.productID)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
 </div>
 </template>
 
-
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-  props: ["product"],
+  data() {
+        return {
+          productName: null,
+          quantity: null,
+          productPrice: null,
+          category:null,
+          productUrl:null
+        };
+    },
+computed: {
+...mapGetters(['getProducts']),
+},
+methods: {
+async fetchProducts() {
+  await this.$store.dispatch('getProds');
+},
+async delProduct(productID) {
+  await this.$store.dispatch('delProduct', productID);
+},
+async updateProduct(product) {
+  try {
+    await this.$store.dispatch('editProd', product);
+    console.log('Product updated successfully');
+  } catch (error) {
+    console.error('Error updating product:', error);
+  }
+}
+},
+created() {
+this.fetchProducts();
+}
 };
 </script>
 
+
 <style scoped>
+.products {
+margin-top: 7%; 
+display: flex;
+flex-wrap: wrap;
+max-width: 1220px;
+width: 100%;
+margin-right: auto;
+margin-left: auto;
+justify-content: center;
+align-items: center;
+gap: 20px;
+padding-bottom: 60px;
+}
+table {
+width: 100%;
+border-collapse: collapse;
+}
+
+th {
+background-color: lightgray;
+}
+
+th, td {
+padding: 8px;
+text-align: left;
+border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+background-color: #f2f2f2;
+}
+
 img{
-    height: 200px;
-}
-.card-title {
-  font-weight: bold;
-  font-family: "Playfair Display", serif;
-  color: #5e5343;
-}
-.card-text {
-  font-size: 14px;
-  padding-top: 5px;
-  height: 80px;
-}
-
-.row {
-  margin: 0 auto;
-}
-.card {
-  width: 14rem;
-  height: 24rem;
-  box-shadow: 10px 10px 5px grey;
-  border-radius: 10px;
-  padding: 16px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.card-container:hover .card {
-  transform: translateY(-10px);
+width: 150px;
+height: 150px;
 }
 
 </style>
