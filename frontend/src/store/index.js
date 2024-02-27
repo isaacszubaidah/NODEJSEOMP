@@ -52,10 +52,10 @@ export default createStore({
         console.error('Error deleting product:', error);
       }
     },
-    async editProd({ commit }, updatedProduct) {
+    async editProd({ commit },  updatedProduct) {
       try {
-        const response = await fetch(`${baseUrl}/products/${productID}`, {
-          method: 'PUT',
+        const response = await fetch(`${baseUrl}/products/${updatedProduct.productID}`, {
+          method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -68,7 +68,7 @@ export default createStore({
       } catch (error) {
         console.error('Error updating product:', error);
       }
-    }    
+    }   
   },
   modules: {}
 });
