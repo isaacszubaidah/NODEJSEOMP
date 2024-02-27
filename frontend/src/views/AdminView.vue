@@ -1,8 +1,9 @@
 <template>
   <div class="admin-container">
-    <navbar />
+    <navbar v-if="!loading" />
+    <spinner class="spinner" v-if="loading"/>
     <!-- {{products}} -->
-    <div class="products">
+    <div class="products" v-else>
       <ProductCard
         v-for="product of products"
         :key="product.productID"
@@ -27,14 +28,16 @@
 <script>
 import navbar from "@/components/nav.vue";
 import ProductCard from "@/components/ProductCard.vue";
+import spinner from "@/components/Spinner.vue"
 export default {
   components: {
     navbar,
     ProductCard,
+    spinner
   },
   data() {
-    return {
-      //   products: null,
+    return{
+      loading:true,
     };
   },
   computed: {
@@ -45,8 +48,10 @@ export default {
 
   mounted() {
     this.$store.dispatch("display");
+    setTimeout(() => {
+      this.loading = false;
+    }, 6000);
   },
-  //   components: { ProductCard },
 };
 </script>
 
@@ -63,5 +68,10 @@ export default {
   align-items: center;
   gap: 20px;
   padding-bottom: 60px;
+}
+
+.spinner{
+background-color: black;
+width: 100%;
 }
 </style>
