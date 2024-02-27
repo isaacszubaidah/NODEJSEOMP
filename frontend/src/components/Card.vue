@@ -27,7 +27,7 @@
     
     <style scoped>
     img{
-        height: 200px;
+        height: 230px;
     }
     .card-title {
       font-weight: 200;
@@ -37,8 +37,8 @@
     .card-text {
         font-family: "Fraunces", serif;
       font-size: 14px;
-      padding-top: 5px;
-      height: 17px;
+      padding-top: 7px;
+      height: 20px;
     }
     
     .row {
@@ -46,7 +46,7 @@
     }
     .card {
       width: 16rem;
-      height: 25rem;
+      height: 29rem;
       box-shadow: 10px 10px 5px grey;
       border-radius: 10px;
       padding: 16px;
