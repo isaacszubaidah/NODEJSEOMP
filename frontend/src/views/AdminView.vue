@@ -3,43 +3,43 @@
     <navbar />
     <!-- {{products}} -->
     <div class="products">
-      <ProductCard
+      <!-- <ProductCard
       v-for="product of getProducts"
     :key="product.productID"
     :product="product"
-      />
+      /> -->
+      <ProductCard />
     </div>
   </div>
 </template>
 
 <script>
-import ProductCard from '@/components/ProductCard.vue'
-import navbar from '@/components/nav.vue'
-import { mapGetters } from 'vuex';
+import ProductCard from "@/components/ProductCard.vue";
+import navbar from "@/components/nav.vue";
+import { mapGetters } from "vuex";
 
 export default {
-  components:{
+  components: {
     navbar,
-    ProductCard
+    ProductCard,
   },
   computed: {
-    ...mapGetters(['getProducts']), // Ensure getProducts is correctly mapped
+    ...mapGetters(["getProducts"]), // Ensure getProducts is correctly mapped
   },
   methods: {
     async fetchProducts() {
-      await this.$store.dispatch('getProds');
-    }
+      await this.$store.dispatch("getProds");
+    },
   },
   created() {
     this.fetchProducts(); // Fetch products when the component is created
-  }
+  },
 };
 </script>
 
-
 <style scoped>
 .products {
-  margin-top: 7%; 
+  margin-top: 7%;
   display: flex;
   flex-wrap: wrap;
   max-width: 1220px;
@@ -60,7 +60,8 @@ th {
   background-color: lightgray;
 }
 
-th, td {
+th,
+td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -70,9 +71,8 @@ tr:hover {
   background-color: #f2f2f2;
 }
 
-img{
+img {
   width: 150px;
   height: 150px;
 }
-
 </style>
