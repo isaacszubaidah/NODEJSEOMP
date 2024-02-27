@@ -5,6 +5,7 @@ import OurMenueView from '../views/OurMenueView.vue'
 import ReservationView from '../views/ReservationView.vue'
 import AdminView from '../views/AdminView.vue'
 import ContactView from '../views/ContactView.vue'
+import ProductView from '../views/ProductView.vue'
 
 const routes = [
   {
@@ -36,7 +37,12 @@ const routes = [
     path: '/contact',
     name: 'contact',
     component:ContactView
-  }
+  },
+  {
+    path: '/product',
+    name: 'product',
+    component:ProductView
+  },
 ]
 
 const router = createRouter({

@@ -1,59 +1,35 @@
 <template>
   <div class="admin-container">
-    <navbar v-if="!loading" />
-    <spinner class="spinner" v-if="loading"/>
-    <!-- {{products}} -->
-    <div class="products" v-else>
+    <navbar />
+    {{products}}
+    <div class="products">
       <ProductCard
         v-for="product of products"
         :key="product.productID"
         :product="product"
       />
     </div>
-    <!-- <div class="table">
-    <th>ID</th>
-    <th>Name</th>
-    <th>Category</th>
-    
-    <ProductCard v-for="item in $store.state.products" :key="item.productID">
-        <td>{{ item.productIDid }}</td>
-        <td>{{ item.productName }}</td>
-        <td>{{ item.category }}</td>
-    </ProductCard>
-   
-</div> -->
   </div>
 </template>
 
 <script>
-import navbar from "@/components/nav.vue";
-import ProductCard from "@/components/ProductCard.vue";
-import spinner from "@/components/Spinner.vue"
-export default {
-  components: {
-    navbar,
-    ProductCard,
-    spinner
-  },
-  data() {
-    return{
-      loading:true,
-    };
-  },
-  computed: {
-    products() {
-      return this.$store.state.products;
-    },
-  },
+import { mapGetters } from 'vuex';
 
-  mounted() {
-    this.$store.dispatch("display");
-    setTimeout(() => {
-      this.loading = false;
-    }, 6000);
+export default {
+  computed: {
+    ...mapGetters(['getProducts']), // Ensure getProducts is correctly mapped
   },
+  methods: {
+    async fetchProducts() {
+      await this.$store.dispatch('getProds');
+    }
+  },
+  created() {
+    this.fetchProducts(); // Fetch products when the component is created
+  }
 };
 </script>
+
 
 <style scoped>
 .products {
@@ -69,9 +45,28 @@ export default {
   gap: 20px;
   padding-bottom: 60px;
 }
-
-.spinner{
-background-color: black;
-width: 100%;
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
+
+th {
+  background-color: lightgray;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f2f2f2;
+}
+
+img{
+  width: 150px;
+  height: 150px;
+}
+
 </style>

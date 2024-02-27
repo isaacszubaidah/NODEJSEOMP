@@ -109,7 +109,7 @@ button {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  margin-left: 274px;
+  margin-left: 199px;
   border: 2px white solid;
   width: 30%;
   margin-top: 15%;
