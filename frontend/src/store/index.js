@@ -54,6 +54,7 @@ export default createStore({
     },
     async editProd({ commit }, updatedProduct) {
       try {
+        const {productID} = updatedProduct
         const response = await fetch(`${baseUrl}/products/${productID}`, {
           method: 'PUT',
           headers: {

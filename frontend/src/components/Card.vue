@@ -6,7 +6,7 @@
                 <div class="card-body">
                 <h5 class="card-title">{{ product.productName }}</h5>
                 <p class="card-text">{{ product.category }}</p>
-                <p class="card-text">{{ product.productPrice }}</p>
+                <p class="card-text">R{{ product.productPrice }}</p>
                 <button class="view"><router-link class="type" to="/">View More</router-link></button>
               </div>
     
