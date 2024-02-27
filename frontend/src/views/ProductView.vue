@@ -1,7 +1,11 @@
 <template>
   <div>
     <div v-for="product in getProduct" :key="product.id">
-      <div>{{ product.productName }}</div>
+      <div>
+        <img :src="product.productUrl" alt="">
+        <p>{{ product.productName }} </p>
+        <p>R{{ product.productPrice}} </p>
+      </div>
     </div>
   </div>
 </template>
