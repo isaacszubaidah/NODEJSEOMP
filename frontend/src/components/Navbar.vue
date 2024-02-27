@@ -117,6 +117,7 @@ span {
 }
 
 .link {
+  font-size: 18px;
   color: white;
   text-decoration: none;
 }
