@@ -1,4 +1,5 @@
 <template>
+  
   <div>
   <h2>Products</h2>
         <table>
@@ -61,6 +62,8 @@
 import { mapGetters } from 'vuex';
 
 export default {
+
+}
   data() {
         return {
           productName: null,
@@ -92,10 +95,11 @@ async updateProduct(product) {
 created() {
 this.fetchProducts();
 }
-};
+;
 </script>
 
 
+<style>
 <style scoped>
 .products {
 margin-top: 7%; 
