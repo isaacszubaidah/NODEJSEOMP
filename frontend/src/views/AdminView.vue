@@ -4,9 +4,9 @@
     <!-- {{products}} -->
     <div class="products">
       <ProductCard
-      v-for="product of products"
-      :key="product.productID"
-      :product="product"
+        v-for="product of products"
+        :key="product.productID"
+        :product="product"
       />
     </div>
     <!-- <div class="table">
@@ -30,11 +30,11 @@ import ProductCard from "@/components/ProductCard.vue";
 export default {
   components: {
     navbar,
-    ProductCard
+    ProductCard,
   },
   data() {
     return {
-    //   products: null,
+      //   products: null,
     };
   },
   computed: {
@@ -44,15 +44,15 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch('display');
+    this.$store.dispatch("display");
   },
-//   components: { ProductCard },
+  //   components: { ProductCard },
 };
 </script>
 
 <style scoped>
 .products {
-    margin-top: 7%;
+  margin-top: 7%; 
   display: flex;
   flex-wrap: wrap;
   max-width: 1220px;
@@ -64,6 +64,4 @@ export default {
   gap: 20px;
   padding-bottom: 60px;
 }
-
-
 </style>
