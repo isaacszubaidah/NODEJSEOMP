@@ -1,21 +1,27 @@
 <template>
   <div class="admin-container">
     <navbar />
-    {{products}}
+    <!-- {{products}} -->
     <div class="products">
       <ProductCard
-        v-for="product of products"
-        :key="product.productID"
-        :product="product"
+      v-for="product of getProducts"
+    :key="product.productID"
+    :product="product"
       />
     </div>
   </div>
 </template>
 
 <script>
+import ProductCard from '@/components/ProductCard.vue'
+import navbar from '@/components/nav.vue'
 import { mapGetters } from 'vuex';
 
 export default {
+  components:{
+    navbar,
+    ProductCard
+  },
   computed: {
     ...mapGetters(['getProducts']), // Ensure getProducts is correctly mapped
   },
