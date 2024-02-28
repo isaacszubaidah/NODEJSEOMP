@@ -59,16 +59,8 @@
             <router-link
               class="nav-link active"
               aria-curent="page"
-              to="/reservation"
-              >| Reservations |</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <router-link
-              class="nav-link active"
-              aria-curent="page"
               to="/admin"
-              > Admin |</router-link
+              >|  Admin |</router-link
             >
           </li>
           <li class="nav-item">

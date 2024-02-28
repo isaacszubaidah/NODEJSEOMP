@@ -35,6 +35,16 @@
           <td>
             <button
               type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              :data-bs-target="'#addModal' + product.productID"
+            >
+              Add
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
               class="btn btn-dark"
               @click="delProduct(product.productID)"
             >
@@ -63,6 +73,27 @@
               >
                 Edit Product
               </h5>
+              <div
+                class="modal fade"
+                :id="'addModal' + product.productID"
+                tabindex="-1"
+                aria-labelledby="'addModalLabel' + product.productID"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5
+                        class="modal-title"
+                        :id="'addModalLabel' + product.productID"
+                      >
+                        Add Product
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <button
                 type="button"
                 class="btn-close"
@@ -140,6 +171,14 @@ export default {
         console.log("Product updated successfully");
       } catch (error) {
         console.error("Error updating product:", error);
+      }
+    },
+    async newProduct(product) {
+      try {
+        await this.$store.dispatch("addProd", product);
+        console.log("Product added successfully");
+      } catch (error) {
+        console.error("Error adding product:", error);
       }
     },
   },

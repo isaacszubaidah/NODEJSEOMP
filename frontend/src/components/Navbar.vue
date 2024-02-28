@@ -35,8 +35,6 @@
         </div>
       </div>
       <span>|</span>
-      <router-link class="link" to="/reservation">Reservation</router-link>
-      <span>|</span>
       <router-link class="link" to="/admin">Admin</router-link>
       <span>|</span>
       <router-link class="link" to="/contact">Contact</router-link>

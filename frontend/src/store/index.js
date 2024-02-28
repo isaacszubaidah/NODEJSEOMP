@@ -31,6 +31,14 @@ export default createStore({
         return product;
       });
     },
+    addProduct(state, newProduct) {
+      state.products = state.products.map((product) => {
+        if (product.productID === newProduct.productID) {
+          return newProduct;
+        }
+        return product;
+      });
+    },
     setProduct(state, product) {
       state.product = product;
     },
@@ -95,7 +103,27 @@ export default createStore({
       } catch (error) {
         console.error("Error updating product:", error);
       }
-    },    
+    },
+    async addProd({ commit }, { productID, newProduct }) {
+      try {
+        const response = await fetch(
+          `${baseUrl}/products/${newProduct.productID}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newProduct),
+          }
+        );
+        if (!response.ok) {
+          throw new Error("Failed to update product");
+        }
+        commit("addProduct", newProduct);
+      } catch (error) {
+        console.error("Error updating product:", error);
+      }
+    },
     async getUsers({ commit }) {
       try {
         const response = await fetch(`${baseUrl}/users`);
