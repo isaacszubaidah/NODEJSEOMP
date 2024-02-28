@@ -79,7 +79,7 @@ export default createStore({
     async editProd({ commit }, { productID, updatedProduct }) {
       try {
         const response = await fetch(
-          `${baseUrl}/products/${updatedProduct.productID}`,
+          `${baseUrl}/products/${productID}`, // Use productID instead of updatedProduct.productID
           {
             method: "PATCH",
             headers: {
@@ -95,7 +95,7 @@ export default createStore({
       } catch (error) {
         console.error("Error updating product:", error);
       }
-    },
+    },    
     async getUsers({ commit }) {
       try {
         const response = await fetch(`${baseUrl}/users`);
