@@ -6,10 +6,12 @@ export default createStore({
   state: {
     products: null,
     product: null,
+    users: null,
   },
   getters: {
     getProducts: (state) => state.products,
     getProduct: (state) => state.product,
+    getUsers: (state)=> state.users,
   },
   mutations: {
     setProducts(state, products) {
@@ -32,6 +34,9 @@ export default createStore({
     setProduct(state, product) {
       state.product = product;
     },
+    setUsers(state,users){
+      state.users=users;
+    }
   },
   actions: {
     async getProds({ commit }) {
@@ -89,6 +94,18 @@ export default createStore({
         commit("editProduct", updatedProduct);
       } catch (error) {
         console.error("Error updating product:", error);
+      }
+    },
+    async getUsers({ commit }) {
+      try {
+        const response = await fetch(`${baseUrl}/users`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const users = await response.json();
+        commit("setUsers", users);
+      } catch (error) {
+        console.error("Error fetching users:", error);
       }
     },
   },

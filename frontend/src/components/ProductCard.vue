@@ -149,7 +149,7 @@ export default {
 };
 </script>
 <style scoped>
-.products {
+/* .products {
   margin-top: 7%;
   display: flex;
   flex-wrap: wrap;
@@ -161,7 +161,7 @@ export default {
   align-items: center;
   gap: 20px;
   padding-bottom: 60px;
-}
+} */
 table {
   width: 100%;
   border-collapse: collapse;

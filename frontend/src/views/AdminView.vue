@@ -10,10 +10,14 @@
       /> -->
       <ProductCard />
     </div>
+    <div class="users">
+      <UsersCard />
+    </div>
   </div>
 </template>
 
 <script>
+import UsersCard from "@/components/UsersCard.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import navbar from "@/components/nav.vue";
 import { mapGetters } from "vuex";
@@ -22,23 +26,41 @@ export default {
   components: {
     navbar,
     ProductCard,
+    UsersCard,
   },
   computed: {
     ...mapGetters(["getProducts"]), // Ensure getProducts is correctly mapped
+    ...mapGetters(["getUsers"]), // Ensure getProducts is correctly mapped
   },
   methods: {
     async fetchProducts() {
       await this.$store.dispatch("getProds");
     },
+    async fetchUsers() {
+      await this.$store.dispatch("getUsers");
+    },
   },
   created() {
-    this.fetchProducts(); // Fetch products when the component is created
+    this.fetchUsers(); // Fetch products when the component is created
   },
 };
 </script>
 
 <style scoped>
 .products {
+  margin-top: 7%;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1220px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 60px;
+}
+.users {
   margin-top: 7%;
   display: flex;
   flex-wrap: wrap;
