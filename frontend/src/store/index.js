@@ -7,13 +7,13 @@ export default createStore({
     products: null,
     product: null,
     users: null,
-    category:null,
+    category: null,
   },
   getters: {
     getProducts: (state) => state.products,
     getProduct: (state) => state.product,
-    getUsers: (state)=> state.users,
-    getCategory:(state)=> state.category
+    getUsers: (state) => state.users,
+    getCategory: (state) => state.category,
   },
   mutations: {
     setProducts(state, products) {
@@ -45,12 +45,12 @@ export default createStore({
     setProduct(state, product) {
       state.product = product;
     },
-    setUsers(state,users){
-      state.users=users;
+    setUsers(state, users) {
+      state.users = users;
     },
-    setCategory(state,category){
-      state.category=category
-    }
+    setCategory(state, category) {
+      state.category = category;
+    },
   },
   actions: {
     async getProds({ commit }) {
@@ -77,14 +77,22 @@ export default createStore({
         console.error("Error fetching product:", error);
       }
     },
-    async getCategory({ commit }, category) {
+    async getProdCategory({ commit }, category) {
+      console.log("🚀 ~ getProdCategory ~ category:", category);
       try {
-        const response = await fetch(`${baseUrl}/products/${category}`);
+        const response = await fetch(`${baseUrl}/products`);
         if (!response.ok) {
           throw new Error("Failed to fetch category");
         }
-        const category = await response.json();
-        commit("setCategory", category);
+        let products = await response.json();
+
+        products = products.filter((product) => {
+          const productCategory = (product.category || "")?.toLowerCase();
+          return productCategory === category.toLowerCase();
+        });
+
+        console.log("🚀 ~ getProdCategory ~ products:", products);
+        commit("setCategory", products);
       } catch (error) {
         console.error("Error fetching category:", error);
       }
@@ -153,7 +161,7 @@ export default createStore({
       } catch (error) {
         console.error("Error fetching users:", error);
       }
-    },  
+    },
   },
   modules: {},
 });

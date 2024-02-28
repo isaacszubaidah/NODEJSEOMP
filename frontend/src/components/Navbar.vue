@@ -27,12 +27,17 @@
       <span>|</span>
       <div class="dropdown">
         <router-link class="link" to="/menue">Our Menu</router-link>
-
-        <div class="dropdown-content">
-          <router-link class="dropdown-item" to="/menue">Starters</router-link>
-          <router-link class="dropdown-item" to="/menue">Main</router-link>
-          <router-link class="dropdown-item" to="/menue">Dessert</router-link>
-        </div>
+      </div>
+      <div class="dropdown-content">
+        <router-link class="dropdown-item" to="/product-menue/main"
+          >Starters</router-link
+        >
+        <router-link class="dropdown-item" to="/product-menue/main"
+          >Main</router-link
+        >
+        <router-link class="dropdown-item" to="/product-menue/main"
+          >Dessert</router-link
+        >
       </div>
       <span>|</span>
       <router-link class="link" to="/admin">Admin</router-link>

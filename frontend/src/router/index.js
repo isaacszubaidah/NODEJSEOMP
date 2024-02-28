@@ -5,6 +5,7 @@ import OurMenueView from "../views/OurMenueView.vue";
 import AdminView from "../views/AdminView.vue";
 import ContactView from "../views/ContactView.vue";
 import ProductView from "../views/ProductView.vue";
+import MenuView from "../views/MenuView.vue";
 
 const routes = [
   {
@@ -21,6 +22,11 @@ const routes = [
     path: "/menue",
     name: "menue",
     component: OurMenueView,
+  },
+  {
+    path: "/product-menue/:catergory",
+    name: "product-menue",
+    component: MenuView,
   },
   {
     path: "/admin",
