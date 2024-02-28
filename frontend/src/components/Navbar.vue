@@ -27,17 +27,18 @@
       <span>|</span>
       <div class="dropdown">
         <router-link class="link" to="/menue">Our Menu</router-link>
-      </div>
-      <div class="dropdown-content">
-        <router-link class="dropdown-item" :to="`/product-menue/:category`"
-          >Starters</router-link
-        >
-        <router-link class="dropdown-item" :to="`/product-menue/:category`"
-          >Main</router-link
-        >
-        <router-link class="dropdown-item" :to="`/product-menue/:category`"
-          >Dessert</router-link
-        >
+
+        <div class="dropdown-content">
+          <a class="dropdown-item" href="/product-menue/Starter"
+            >Starters</a
+          >
+          <a class="dropdown-item" href="/product-menue/Main"
+            >Main</a
+          >
+          <a class="dropdown-item" href="/product-menue/Dessert"
+            >Dessert</a
+          >
+        </div>
       </div>
       <span>|</span>
       <router-link class="link" to="/admin">Admin</router-link>
@@ -86,7 +87,27 @@ span {
   padding-right: 60px;
   z-index: 99;
 }
+.menu-toggle {
+  display: flex;
+  cursor: pointer;
+}
 
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 120px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  top: 100%;
+}
+
+.dropdown-item {
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+}
 .menu-toggle {
   display: none;
 }
@@ -100,6 +121,10 @@ span {
   position: relative;
 }
 
+.dropdown {
+  position: relative;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -107,6 +132,7 @@ span {
   min-width: 120px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 999;
+  top: 100%; /* Position below the dropdown */
 }
 
 .dropdown:hover .dropdown-content {
