@@ -1,6 +1,8 @@
 <template>
   <div class="navbar">
-    <router-link  to="/"><img class="logo" src="https://i.imgur.com/zkMo7Zp.png" alt="" /></router-link>
+    <router-link to="/"
+      ><img class="logo" src="https://i.imgur.com/zkMo7Zp.png" alt=""
+    /></router-link>
     <div class="menu-toggle" @click="toggleMenu">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -28,14 +30,14 @@
         >Home</router-link
       >
       <!-- Apply color based on prop -->
-      <span>|</span>
+      <span :style="{ color: home ? 'black' : 'white' }">|</span>
       <router-link
         class="link"
         :style="{ color: home ? 'black' : 'white' }"
         to="/about"
         >About</router-link
       >
-      <span>|</span>
+      <span :style="{ color: home ? 'black' : 'white' }">|</span>
       <div class="dropdown">
         <router-link
           class="link"
@@ -50,14 +52,14 @@
           <a class="dropdown-item" href="/product-menue/Dessert">Dessert</a>
         </div>
       </div>
-      <span>|</span>
+      <span :style="{ color: home ? 'black' : 'white' }">|</span>
       <router-link
         class="link"
         :style="{ color: home ? 'black' : 'white' }"
         to="/admin"
         >Admin</router-link
       >
-      <span>|</span>
+      <span :style="{ color: home ? 'black' : 'white' }">|</span>
       <router-link
         class="link"
         :style="{ color: home ? 'black' : 'white' }"
@@ -222,9 +224,9 @@ span {
   }
 
   .link {
-  font-size: 18px;
-  text-decoration: none;
-  color: black !important;
-}
+    font-size: 18px;
+    text-decoration: none;
+    color: black !important;
+  }
 }
 </style>
