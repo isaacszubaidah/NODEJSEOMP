@@ -148,9 +148,6 @@ export default {
   },
 };
 </script>
-
-
-<style>
 <style scoped>
 /* .products {
   margin-top: 7%;
@@ -190,4 +187,3 @@ img {
   height: 150px;
 }
 </style>
-
