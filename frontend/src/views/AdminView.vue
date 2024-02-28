@@ -1,8 +1,9 @@
 <template>
   <div class="admin-container">
-    <navbar />
+    <navbar v-if="!loading" />
+    <Loader v-if="loading"/>
     <!-- {{products}} -->
-    <div class="products">
+    <div class="products" v-else>
       <!-- <ProductCard
       v-for="product of getProducts"
     :key="product.productID"
@@ -17,6 +18,7 @@
 </template>
 
 <script>
+import Loader from '@/components/Loader.vue'
 import UsersCard from "@/components/UsersCard.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import navbar from "@/components/nav.vue";
@@ -27,6 +29,12 @@ export default {
     navbar,
     ProductCard,
     UsersCard,
+    Loader
+  },
+  data() {
+    return {
+      loading: true,
+    };
   },
   computed: {
     ...mapGetters(["getProducts"]), // Ensure getProducts is correctly mapped
@@ -35,6 +43,11 @@ export default {
     async fetchProducts() {
       await this.$store.dispatch("getProds");
     },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 5000);
   },
 };
 </script>

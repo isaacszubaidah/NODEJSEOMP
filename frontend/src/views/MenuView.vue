@@ -26,8 +26,8 @@ export default {
   },
   methods: {
     async fetchProducts() {
-      const catergoryAactive = this.$route.params.catergory;
-      this.$store.dispatch("getProdCategory", catergoryAactive);
+      const categoryAactive = this.$route.params.category;
+      this.$store.dispatch("getProdCategory", categoryAactive);
     },
   },
   created() {

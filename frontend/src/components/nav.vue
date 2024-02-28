@@ -39,18 +39,18 @@
             </router-link>
             <ul class="dropdown-menu bg-light">
               <li>
-                <router-link class="dropdown-item" to="/menue"
-                  >Starters</router-link
+                <a  class="dropdown-item" href="/product-menue/Starter"
+                  >Starters</a
                 >
               </li>
               <li>
-                <router-link class="dropdown-item" to="/menue"
-                  >Main</router-link
+                <a class="dropdown-item" href="/product-menue/Main"
+                  >Main</a
                 >
               </li>
               <li>
-                <router-link class="dropdown-item" to="/menue"
-                  >Dessert</router-link
+                <a class="dropdown-item" href="/product-menue/Dessert"
+                  >Dessert</a
                 >
               </li>
             </ul>
@@ -78,7 +78,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+
+};
 </script>
 
 <style scoped>

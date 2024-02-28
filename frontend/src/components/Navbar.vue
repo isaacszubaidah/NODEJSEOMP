@@ -29,13 +29,13 @@
         <router-link class="link" to="/menue">Our Menu</router-link>
       </div>
       <div class="dropdown-content">
-        <router-link class="dropdown-item" to="/product-menue/main"
+        <router-link class="dropdown-item" :to="`/product-menue/:category`"
           >Starters</router-link
         >
-        <router-link class="dropdown-item" to="/product-menue/main"
+        <router-link class="dropdown-item" :to="`/product-menue/:category`"
           >Main</router-link
         >
-        <router-link class="dropdown-item" to="/product-menue/main"
+        <router-link class="dropdown-item" :to="`/product-menue/:category`"
           >Dessert</router-link
         >
       </div>

@@ -24,7 +24,7 @@ const routes = [
     component: OurMenueView,
   },
   {
-    path: "/product-menue/:catergory",
+    path: "/product-menue/:category",
     name: "product-menue",
     component: MenuView,
   },
