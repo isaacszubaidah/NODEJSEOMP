@@ -68,7 +68,7 @@ const editProd = async (productName, quantity, productPrice, category, productUr
     productPrice = ?, 
     category = ?, 
     productUrl = ?
-    WHERE (productID = ?);
+    WHERE productID = ?;
     `, [productName, quantity, productPrice, category, productUrl, productID]);
     return edit;
 };
