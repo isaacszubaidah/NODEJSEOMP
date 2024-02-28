@@ -52,7 +52,7 @@ export default createStore({
         console.error('Error deleting product:', error);
       }
     },
-    async editProd({ commit }, updatedProduct) {
+    async editProd({ commit }, { productID, updatedProduct }) { // Correction made here
       try {
         const response = await fetch(`${baseUrl}/products/${productID}`, {
           method: 'PUT',
