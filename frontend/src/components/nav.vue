@@ -97,6 +97,7 @@ nav {
   align-items: center;
   margin-right: auto;
   margin-left: auto;
+  background: white !important;
 }
 .nav-item .nav-link.active {
   font-size: 18px;

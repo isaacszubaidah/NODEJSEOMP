@@ -1,6 +1,6 @@
 <template>
   <div class="menu-container vh-100">
-    <navbar />
+           <Navbar :home="true"   />
     <div class="sortfilter">
       <div class="sort-controls">
         <select v-model="sortBy">
@@ -27,11 +27,11 @@
 </template>
 
 <script>
-import navbar from "@/components/nav.vue";
+import Navbar from "@/components/Navbar.vue";
 import Card from "@/components/Card.vue";
 export default {
   components: {
-    navbar,
+    Navbar,
     Card,
   },
   data() {

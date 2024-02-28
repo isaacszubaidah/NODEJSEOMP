@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="home">
-      <Navbar v-if="!loading" />
+
+         <Navbar :home="false" v-if="!loading"  /> 
       <spinner v-if="loading" />
       <div class="something" v-else>
         <div class="background-video">

@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <navbar />
+      <Navbar :home="true" /> 
     <div class="about col-6">
       <h2>Good Food Alley</h2>
       <p>
@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import navbar from "@/components/nav.vue";
+import Navbar from "@/components/Navbar.vue";
 export default {
   components: {
-    navbar,
+    Navbar,
   },
 };
 </script>

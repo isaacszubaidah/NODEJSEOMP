@@ -1,6 +1,6 @@
 <template>
   <div class="menue-container vh-100">
-    <navbar />
+         <Navbar :home="true"   />
 
     <div class="products">
       <Card
@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import navbar from "@/components/nav.vue";
+import Navbar from "@/components/Navbar.vue";
 import Card from "@/components/Card.vue";
 import { mapGetters } from "vuex";
 export default {
   components: {
-    navbar,
+    Navbar,
     Card,
   },
   computed: {

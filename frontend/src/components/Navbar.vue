@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <div><img class="logo" src="https://i.imgur.com/zkMo7Zp.png" alt="" /></div>
+    <router-link  to="/"><img class="logo" src="https://i.imgur.com/zkMo7Zp.png" alt="" /></router-link>
     <div class="menu-toggle" @click="toggleMenu">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -9,7 +9,7 @@
         height="24"
         viewBox="0 0 24 24"
         stroke-width="1.5"
-        stroke="white"
+        stroke="#311D00"
         fill="none"
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -21,35 +21,61 @@
       </svg>
     </div>
     <div class="router-links" :class="{ 'show-menu': isMenuOpen }">
-      <router-link class="link" to="/">Home</router-link>
+      <router-link
+        class="link"
+        :style="{ color: home ? 'black' : 'white' }"
+        to="/"
+        >Home</router-link
+      >
+      <!-- Apply color based on prop -->
       <span>|</span>
-      <router-link class="link" to="/about">About</router-link>
+      <router-link
+        class="link"
+        :style="{ color: home ? 'black' : 'white' }"
+        to="/about"
+        >About</router-link
+      >
       <span>|</span>
       <div class="dropdown">
-        <router-link class="link" to="/menue">Our Menu</router-link>
+        <router-link
+          class="link"
+          :style="{ color: home ? 'black' : 'white' }"
+          to="/menue"
+          >Our Menu</router-link
+        >
 
         <div class="dropdown-content">
-          <a class="dropdown-item" href="/product-menue/Starter"
-            >Starters</a
-          >
-          <a class="dropdown-item" href="/product-menue/Main"
-            >Main</a
-          >
-          <a class="dropdown-item" href="/product-menue/Dessert"
-            >Dessert</a
-          >
+          <a class="dropdown-item" href="/product-menue/Starter">Starters</a>
+          <a class="dropdown-item" href="/product-menue/Main">Main</a>
+          <a class="dropdown-item" href="/product-menue/Dessert">Dessert</a>
         </div>
       </div>
       <span>|</span>
-      <router-link class="link" to="/admin">Admin</router-link>
+      <router-link
+        class="link"
+        :style="{ color: home ? 'black' : 'white' }"
+        to="/admin"
+        >Admin</router-link
+      >
       <span>|</span>
-      <router-link class="link" to="/contact">Contact</router-link>
+      <router-link
+        class="link"
+        :style="{ color: home ? 'black' : 'white' }"
+        to="/contact"
+        >Contact</router-link
+      >
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    home: {
+      required: false,
+      default: false,
+    },
+  },
   data() {
     return {
       isMenuOpen: false,
@@ -62,7 +88,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 * {
   font-family: 'Alegreya", serif';
@@ -147,8 +172,14 @@ span {
 
 .link {
   font-size: 18px;
-  color: white;
   text-decoration: none;
+}
+
+.white {
+  color: white;
+}
+.white {
+  color: black;
 }
 
 @media (max-width: 768px) {
@@ -189,5 +220,11 @@ span {
     width: 40px;
     height: 40px;
   }
+
+  .link {
+  font-size: 18px;
+  text-decoration: none;
+  color: black !important;
+}
 }
 </style>

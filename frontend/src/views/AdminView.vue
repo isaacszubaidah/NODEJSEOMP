@@ -1,6 +1,6 @@
 <template>
   <div class="admin-container">
-    <navbar v-if="!loading" />
+       <Navbar :home="true" v-if="!loading"  /> 
     <Loader v-if="loading" />
     <div class="products" v-else>
       <button
@@ -101,12 +101,12 @@
 import Loader from "@/components/Loader.vue";
 import UsersCard from "@/components/UsersCard.vue";
 import ProductCard from "@/components/ProductCard.vue";
-import navbar from "@/components/nav.vue";
+import Navbar from "@/components/Navbar.vue";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
-    navbar,
+    Navbar,
     ProductCard,
     UsersCard,
     Loader,

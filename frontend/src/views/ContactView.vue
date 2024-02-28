@@ -1,6 +1,6 @@
 <template>
   <div class="vh-100">
-    <navbar />
+         <Navbar :home="true"   />
     <div class="contact">
       <div>
         <h1 class="header">Keep In Touch</h1>
@@ -87,9 +87,9 @@
 </template>
 
 <script>
-import navbar from "@/components/nav.vue";
+import Navbar from "@/components/Navbar.vue";
 export default {
-  components: { navbar },
+  components: { Navbar },
   data() {
     return {
       formData: {
