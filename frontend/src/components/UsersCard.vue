@@ -58,8 +58,6 @@ table {
 th {
   background-color: lightgray;
 }
-
-th,
 td {
   padding: 8px;
   text-align: left;
