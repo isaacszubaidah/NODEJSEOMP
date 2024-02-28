@@ -155,6 +155,16 @@
 import { mapGetters } from "vuex";
 
 export default {
+  data(){
+    return {
+      productName:"",
+      quantity:"",
+      productPrice:"",
+      category:"",
+      productUrl:""
+    }
+
+  },
   computed: {
     ...mapGetters(["getProducts"]),
   },

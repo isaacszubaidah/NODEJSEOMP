@@ -7,11 +7,13 @@ export default createStore({
     products: null,
     product: null,
     users: null,
+    category:null,
   },
   getters: {
     getProducts: (state) => state.products,
     getProduct: (state) => state.product,
     getUsers: (state)=> state.users,
+    getCategory:(state)=> state.category
   },
   mutations: {
     setProducts(state, products) {
@@ -30,6 +32,7 @@ export default createStore({
         }
         return product;
       });
+      window.location.reload();
     },
     addProduct(state, newProduct) {
       state.products = state.products.map((product) => {
@@ -44,6 +47,9 @@ export default createStore({
     },
     setUsers(state,users){
       state.users=users;
+    },
+    setCategory(state,category){
+      state.category=category
     }
   },
   actions: {
@@ -69,6 +75,18 @@ export default createStore({
         commit("setProduct", product);
       } catch (error) {
         console.error("Error fetching product:", error);
+      }
+    },
+    async getCategory({ commit }, category) {
+      try {
+        const response = await fetch(`${baseUrl}/products/${category}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch category");
+        }
+        const category = await response.json();
+        commit("setCategory", category);
+      } catch (error) {
+        console.error("Error fetching category:", error);
       }
     },
     async delProduct({ commit }, productID) {
