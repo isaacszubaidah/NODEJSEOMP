@@ -78,7 +78,7 @@ span {
   left: 0;
   top: 0;
   padding-left: 16px;
-  padding-right: 16px;
+  padding-right: 60px;
   z-index: 99;
 }
 

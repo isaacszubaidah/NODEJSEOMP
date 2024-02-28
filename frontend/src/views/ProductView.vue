@@ -1,5 +1,6 @@
 <template>
   <div>
+    <navbar/>
     <div v-for="product in getProduct" :key="product.id">
       <div class="container">
         <img :src="product.productUrl" alt="" />
@@ -16,8 +17,12 @@
 </template>
 
 <script>
+import navbar from "@/components/nav.vue"
 import { mapGetters } from "vuex";
 export default {
+  components:{
+    navbar,
+  },
   computed: {
     ...mapGetters(["getProduct"]),
   },
