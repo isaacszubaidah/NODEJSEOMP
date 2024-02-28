@@ -30,18 +30,11 @@ export default {
   },
   computed: {
     ...mapGetters(["getProducts"]), // Ensure getProducts is correctly mapped
-    ...mapGetters(["getUsers"]), // Ensure getProducts is correctly mapped
   },
   methods: {
     async fetchProducts() {
       await this.$store.dispatch("getProds");
     },
-    async fetchUsers() {
-      await this.$store.dispatch("getUsers");
-    },
-  },
-  created() {
-    this.fetchUsers(); // Fetch products when the component is created
   },
 };
 </script>

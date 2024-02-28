@@ -15,7 +15,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="user in users" :key="user.userId">
+            <tr v-for="user in getUsers" :key="user.userID">
+                <td>{{ user.userID }}</td>
                <td>{{ user.firstName }}</td>
                <td>{{ user.lastName }}</td>
                <td>{{ user.userAge}}</td>
@@ -36,12 +37,15 @@ export default {
     computed: {
     ...mapGetters(["getUsers"]),
   },
-  async fetchUsers() {
-      await this.$store.dispatch("getUsers");
-    },
-    created() {
-    this.fetchUsers();
-  },
+  method:{
+      async fetchUsers() {
+          await this.$store.dispatch("getUsers");
+        },
+        created() {
+        this.fetchUsers();
+      },
+
+  }
 
 }
 </script>
