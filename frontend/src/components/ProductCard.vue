@@ -2,7 +2,6 @@
   <div>
     <h2>Products</h2>
     <table>
-      <!-- Table header -->
       <thead>
         <tr>
           <th>Product ID</th>
@@ -17,7 +16,6 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Table content -->
         <tr v-for="product in getProducts" :key="product.id">
           <!-- Table row content -->
           <td>{{ product.productID }}</td>
@@ -36,16 +34,7 @@
               Edit
             </button>
           </td>
-          <td>
-            <!-- <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-toggle="modal"
-              :data-bs-target="'#addModal' + product.productID"
-            >
-              Add
-            </button> -->
-          </td>
+          <td></td>
           <td>
             <button
               type="button"
@@ -59,7 +48,6 @@
       </tbody>
     </table>
 
-    <!-- Modals -->
     <div v-for="product in getProducts" :key="product.id">
       <!-- Edit Modal -->
       <div
@@ -138,73 +126,6 @@
       </div>
 
       <!-- Add Modal -->
-      <div
-        class="modal fade"
-        :id="'addModal' + product.productID"
-        tabindex="-1"
-        aria-labelledby="'addModalLabel' + product.productID"
-        aria-hidden="true"
-      >
-        <!-- Add Modal content -->
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <!-- Add Modal header -->
-            <div class="modal-header">
-              <h5 class="modal-title" :id="'addModalLabel' + product.productID">
-                Add Product
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <!-- Add Modal body -->
-            <div class="modal-body">
-              <!-- Add Modal inputs -->
-              <input
-                type="text"
-                v-model="productName"
-                placeholder="Product Name"
-              />
-              <input type="text" v-model="quantity" placeholder="Quantity" />
-              <input
-                type="text"
-                v-model="productPrice"
-                placeholder="Product Price"
-              />
-              <input type="text" v-model="category" placeholder="Category" />
-              <input type="text" v-model="productUrl" placeholder="Image URL" />
-            </div>
-            <!-- Add Modal footer -->
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                @click="
-                  newProduct({
-                    productName,
-                    quantity,
-                    productPrice,
-                    category,
-                    productUrl,
-                  })
-                "
-              >
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>

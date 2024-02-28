@@ -7,11 +7,13 @@ export default createStore({
     products: null,
     product: null,
     users: null,
+    user: null,
     category: null,
   },
   getters: {
     getProducts: (state) => state.products,
     getProduct: (state) => state.product,
+    getUser: (state) => state.user,
     getUsers: (state) => state.users,
     getCategory: (state) => state.category,
   },
@@ -22,6 +24,12 @@ export default createStore({
     deleteProduct(state, productID) {
       state.products = state.products.filter(
         (product) => product.ID !== productID
+      );
+      window.location.reload();
+    },
+    deleteUser(state, userID) {
+      state.users = state.users.filter(
+        (user) => user.ID !== userID
       );
       window.location.reload();
     },
@@ -40,6 +48,16 @@ export default createStore({
           return newProduct;
         }
         return product;
+      });
+    },
+
+    addUser(state, newUser) {
+      state.users = state.users.map((user) => {
+        console.log("i was here")
+        if (user.userID === newUser.userID) {
+          return newUser;
+        }
+        return user;
       });
     },
     setProduct(state, product) {
@@ -154,6 +172,31 @@ export default createStore({
         console.error("Error adding product:", error);
       }
     },
+    async addUserDB({ commit }, { newUser }) {
+      console.log("🚀 ~ addUserDB ~ newUser:", newUser);
+      try {
+        const response = await fetch(`${baseUrl}/users`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to add user");
+        }
+
+        const addedUser = await response.json(); 
+        console.log("🚀 ~ addUserDB ~ addedUser:", addedUser);
+
+        commit("setUsers", addedUser); 
+
+        console.log("User added successfully");
+      } catch (error) {
+        console.error("Error adding user:", error);
+      }
+    },
 
     async getUsers({ commit }) {
       try {
@@ -161,12 +204,28 @@ export default createStore({
         if (!response.ok) {
           throw new Error("Failed to fetch users");
         }
-        const products = await response.json();
-        commit("setUsers", products);
+        const usersInDB = await response.json();
+        console.log("🚀 ~ getUsers ~ products:", usersInDB)
+        commit("setUsers", usersInDB);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     },
+
+    async delUser({ commit }, userID) {
+      try {
+        const response = await fetch(`${baseUrl}/users/${userID}`, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          throw new Error("Failed to delete product");
+        }
+        commit("deleteUser", userID);
+      } catch (error) {
+        console.error("Error deleting product:", error);
+      }
+    },
+  
   },
   modules: {},
 });

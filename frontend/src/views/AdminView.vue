@@ -3,10 +3,6 @@
     <navbar v-if="!loading" />
     <Loader v-if="loading" />
     <div class="products" v-else>
-      <ProductCard />
-    </div>
-    <div class="users">
-      <UsersCard />
       <button
         type="button"
         class="btn btn-primary"
@@ -15,11 +11,12 @@
       >
         Add Product
       </button>
+      <ProductCard />
+      <div class="users">
+        <UsersCard />
+      </div>
     </div>
 
-    <!-- Button trigger modal -->
-
-    <!-- Modal -->
     <div
       class="modal fade"
       id="addProductModal"
@@ -39,7 +36,6 @@
             ></button>
           </div>
           <div class="modal-body">
-            <!-- Form for adding a product -->
             <form @submit.prevent="addProduct">
               <div class="mb-3">
                 <label for="productName" class="form-label">Product Name</label>
@@ -126,7 +122,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getProducts"]), // Ensure getProducts is correctly mapped
+    ...mapGetters(["getProducts"]),
   },
   methods: {
     async fetchProducts() {
@@ -180,6 +176,7 @@ export default {
   margin-right: auto;
   margin-left: auto;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   gap: 20px;
   padding-bottom: 60px;
@@ -188,6 +185,7 @@ export default {
   margin-top: 7%;
   display: flex;
   flex-wrap: wrap;
+
   max-width: 1220px;
   width: 100%;
   margin-right: auto;
