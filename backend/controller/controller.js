@@ -1,6 +1,9 @@
 import {addUser, getUsers, getUser, addProd, editProd, editUser, getProds, getProd, delUser, delProduct, checkUser} from '../models/database.js'
 import bcrypt from 'bcrypt'
 import { validate } from '../middleware/middleware.js'
+import jwt from 'jsonwebtoken'
+import { config } from 'dotenv'
+config()
 
 const addOne = async(req,res)=>{
     const{firstName, lastName, userAge, userGender, emailAdd, userPass, userProfile} = req.body
@@ -83,7 +86,7 @@ const valFun = async (req, res, validate) => {
             throw new Error('Invalid password');
         }
 
-        const hashedPassword = await checkUser(userPass);
+        const hashedPassword = await checkUser(userProfile);
         if (!hashedPassword) {
             throw new Error('Invalid hashed password');
         }
@@ -113,6 +116,5 @@ const valFun = async (req, res, validate) => {
         });
     }
 };
-
 
 export{addOne, getAll, getOne, eUser, prodAdd, editOne, getProdss,getPr1,delOne,delProd, valFun}

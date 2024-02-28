@@ -4,9 +4,9 @@ import cors from 'cors';
 import mysql from 'mysql2';
 import bcrypt from 'bcrypt';
 import cookieParser from 'cookie-parser';
-import jwt from 'jsonwebtoken';
 import { addOne, eUser, editOne, getAll, getOne, prodAdd} from './controller/controller.js';
 import UserRouter from './routes/user.js'
+
 config() 
 
 const pool = mysql.createPool({

@@ -15,6 +15,7 @@ const getUsers = async (req,res)=>{
     `)
     return users
 }
+
 const getUser = async (userID)=>{
     const [user] = await pool.query(`
     SELECT * 
@@ -88,14 +89,12 @@ const delProduct = async(productID)=>{
     return result
 }
 
-const checkUser = async(userPass)=>{
-    const {userProfile} = await pool.query(`
+const checkUser = async(userProfile)=>{
+    const [[{userPass}]] = await pool.query(`
     SELECT userPass
     FROM users
-    WHERE userPass = ?
-    `,[userPass])
-    return userProfile
+    WHERE userProfile = ?
+    `,[userProfile])
+    return userPass
 }
-
-
 export{addUser, getUsers, getUser, addProd,getProds,getProd, editProd, editUser, delUser, delProduct, checkUser}
