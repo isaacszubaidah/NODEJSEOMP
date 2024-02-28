@@ -60,7 +60,7 @@ const getProd = async(productID)=>{
     return product
 }
 
-const editProd = async (productName, quantity, productPrice, category, productUrl, id) => {
+const editProd = async (productName, quantity, productPrice, category, productUrl, productID) => {
     const [edit] = await pool.query(`
     UPDATE products SET 
     productName = ?, 
@@ -69,7 +69,7 @@ const editProd = async (productName, quantity, productPrice, category, productUr
     category = ?, 
     productUrl = ?
     WHERE (productID = ?);
-    `, [productName, quantity, productPrice, category, productUrl, id]);
+    `, [productName, quantity, productPrice, category, productUrl, productID]);
     return edit;
 };
 
@@ -97,7 +97,4 @@ const checkUser = async(userProfile)=>{
     `,[userProfile])
     return userPass
 }
-
-
-
 export{addUser, getUsers, getUser, addProd,getProds,getProd, editProd, editUser, delUser, delProduct, checkUser}
