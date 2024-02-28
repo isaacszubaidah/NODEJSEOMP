@@ -20,10 +20,10 @@ const PORT = process.env.PORT;
 const app = express()
 
 app.use(cors({
-    origin:'byezi4481zkbqe5dwtxz-mysql.services.clever-cloud.com',
-    credentials:true
-}
-))
+    origin: ['http://localhost:8080', 'https://nodejseomp-1.onrender.com'],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(express.json())
 
