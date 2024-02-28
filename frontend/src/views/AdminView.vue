@@ -5,7 +5,7 @@
     <div class="products" v-else>
       <ProductCard />
     </div>
-    <div class="users">
+    <div class="users" v-if="!loading">
       <UsersCard />
       <button
         type="button"

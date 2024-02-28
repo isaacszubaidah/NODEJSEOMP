@@ -85,7 +85,7 @@ footer {
     position: fixed;
     margin-top: 10px;
     bottom: 0;
-    background-color: #DEB887;
+    background-color:black;
 }
 }
 </style>
