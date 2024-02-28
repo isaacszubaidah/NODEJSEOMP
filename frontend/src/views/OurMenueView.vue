@@ -70,4 +70,7 @@ export default {
   gap: 20px;
   padding-bottom: 60px;
 }
+Card{
+  
+}
 </style>
