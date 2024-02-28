@@ -25,7 +25,7 @@ export default createStore({
     },
     editProduct(state, updatedProduct) {
       state.products = state.products.map((product) => {
-        if (product.ID === updatedProduct.ID) {
+        if (product.productID === updatedProduct.productID) {
           return updatedProduct;
         }
         return product;
@@ -76,7 +76,7 @@ export default createStore({
         console.error("Error deleting product:", error);
       }
     },
-    async editProd({ commit }, { productID, updatedProduct }) { // Correction made here
+    async editProd({ commit }, { productID, updatedProduct }) {
       try {
         const response = await fetch(
           `${baseUrl}/products/${updatedProduct.productID}`,
@@ -102,12 +102,12 @@ export default createStore({
         if (!response.ok) {
           throw new Error("Failed to fetch users");
         }
-        const users = await response.json();
-        commit("setUsers", users);
+        const products = await response.json();
+        commit("setUsers", products);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
-    },
+    },  
   },
   modules: {},
 });

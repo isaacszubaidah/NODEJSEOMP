@@ -1,53 +1,51 @@
 <template>
-   <div>
+  <div>
     <h2>Users</h2>
     <table>
-        <thead>
-            <tr>
-               <th>UserId</th>
-               <th>FirstName</th>
-               <th>LastName</th>
-               <th>UserAge</th>
-               <th>UserGender</th>
-               <th>UserRole</th>
-               <th>Email</th>
-               <th>UserProfile</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="user in getUsers" :key="user.userID">
-                <td>{{ user.userID }}</td>
-               <td>{{ user.firstName }}</td>
-               <td>{{ user.lastName }}</td>
-               <td>{{ user.userAge}}</td>
-               <td>{{ user.userGender}}</td>
-               <td>{{ user.userRole }}</td>
-               <td>{{ user.emailAdd}}</td>
-               <td>{{ user.userProfile}}</td>
-
-            </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Role</th>
+          <th>Email</th>
+          <th>Profile</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in getUsers" :key="user.userID">
+          <td>{{ user.userID }}</td>
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.userAge }}</td>
+          <td>{{ user.userGender }}</td>
+          <td>{{ user.userRole }}</td>
+          <td>{{ user.emailAdd }}</td>
+          <td>{{ user.userProfile }}</td>
+        </tr>
+      </tbody>
     </table>
-   </div>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+
 export default {
-    computed: {
+  computed: {
     ...mapGetters(["getUsers"]),
   },
-  method:{
-      async fetchUsers() {
-          await this.$store.dispatch("getUsers");
-        },
-        created() {
-        this.fetchUsers();
-      },
-
-  }
-
-}
+  methods: {
+    async fetchUsers() {
+      await this.$store.dispatch("getUsers");
+    },
+  },
+  created() {
+    this.fetchUsers();
+  },
+};
 </script>
 
 <style scoped>
