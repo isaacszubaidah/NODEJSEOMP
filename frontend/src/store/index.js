@@ -50,7 +50,6 @@ export default createStore({
         return product;
       });
     },
-
     addUser(state, newUser) {
       state.users = state.users.map((user) => {
         console.log("i was here")

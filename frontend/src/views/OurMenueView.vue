@@ -1,10 +1,15 @@
 <template>
   <div class="menue-container vh-100">
     <navbar />
-    <!-- {{products}} -->
+    <!-- Search input field -->
     <div class="products">
+      <input
+        type="text"
+        v-model="searchQuery"
+        placeholder="Search by product name"
+      />
       <Card
-        v-for="product of products"
+        v-for="product of filteredProducts"
         :key="product.productID"
         :product="product"
       />
@@ -22,27 +27,40 @@ export default {
   },
   data() {
     return {
-      //   products: null,
+      searchQuery: "",
     };
   },
   computed: {
     products() {
       return this.$store.state.products;
     },
+    // Filtered products based on search query
+    filteredProducts() {
+      if (!this.searchQuery) {
+        return this.products;
+      } else {
+        return this.products.filter(
+          (product) =>
+            product.productName &&
+            product.productName
+              .toLowerCase()
+              .includes(this.searchQuery.toLowerCase())
+        );
+      }
+    },
   },
-
-  mounted() {
-    this.$store.dispatch("display");
-  },
-  //   components: { ProductCard },
+  // mounted() {
+  //   this.$store.dispatch("display");
+  // },
 };
 </script>
 
 <style scoped>
 .products {
-  margin-top: 7%; 
+  margin-top: 7%;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   max-width: 1220px;
   width: 100%;
   margin-right: auto;
