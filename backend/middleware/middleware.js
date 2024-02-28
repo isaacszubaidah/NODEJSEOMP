@@ -2,8 +2,6 @@ import jwt from 'jsonwebtoken'
 import { config } from 'dotenv'
 config()
 
-const SECRET_KEY = process.env.SECRET_KEY
-
 const validate = (req,res,next)=>{
     let {cookie} = req.headers
     let tokenInHeader = cookie && cookie.split('=')[1]
@@ -14,5 +12,4 @@ const validate = (req,res,next)=>{
     next()
     })
 }
-console.log(SECRET_KEY);
 export{validate}
