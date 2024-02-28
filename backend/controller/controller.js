@@ -58,16 +58,20 @@ const getPr1 = async(req,res)=>{
 
 
 const editOne = async (req, res) => {
-    const { productName, quantity, productPrice, category, productUrl } = req.body;
+    const [product] = await getProd(+req.params.productID)
+    let { productName, quantity, productPrice, category, productUrl } = req.body;
     productName ? productName=productName: {productName}=product.productName
     quantity ? quantity=quantity: {quantity}=product.quantity
     productPrice ? productPrice=productPrice: {productPrice}=product.productPrice
     category ? category=category: {category}=product.category
     productUrl ? productUrl=productUrl: {productUrl}=product.productUrl
-    const id = req.params.id;
-    await editProd(productName, quantity, productPrice, category, productUrl, id);
-    res.json({ success: true });
+    await editProd(productName, quantity, productPrice, category, productUrl, +req.params.productID);
+    res.status(200).json({ 
+        success: true,
+        msg: "Product successfully updated"
+    });     
 };
+
 
 const delOne = async (req,res)=>{
     await delUser(+req.params.userID)
