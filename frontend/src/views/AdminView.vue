@@ -1,24 +1,108 @@
 <template>
   <div class="admin-container">
     <navbar v-if="!loading" />
-    <Loader v-if="loading"/>
-    <!-- {{products}} -->
+    <Loader v-if="loading" />
     <div class="products" v-else>
-      <!-- <ProductCard
-      v-for="product of getProducts"
-    :key="product.productID"
-    :product="product"
-      /> -->
       <ProductCard />
     </div>
     <div class="users">
       <UsersCard />
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#addProductModal"
+      >
+        Add Product
+      </button>
+    </div>
+
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="addProductModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- Form for adding a product -->
+            <form @submit.prevent="addProduct">
+              <div class="mb-3">
+                <label for="productName" class="form-label">Product Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productName"
+                  v-model="productName"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="quantity"
+                  v-model="quantity"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="productPrice" class="form-label">Price</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="productPrice"
+                  v-model="productPrice"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="category" class="form-label">category</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="category"
+                  v-model="category"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="productUrl" class="form-label">Image Url</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productUrl"
+                  v-model="productUrl"
+                  required
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Loader from '@/components/Loader.vue'
+import Loader from "@/components/Loader.vue";
 import UsersCard from "@/components/UsersCard.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import navbar from "@/components/nav.vue";
@@ -29,11 +113,16 @@ export default {
     navbar,
     ProductCard,
     UsersCard,
-    Loader
+    Loader,
   },
   data() {
     return {
       loading: true,
+      productName: "",
+      quantity: "",
+      productPrice: "",
+      category: "",
+      productUrl: "",
     };
   },
   computed: {
@@ -42,6 +131,35 @@ export default {
   methods: {
     async fetchProducts() {
       await this.$store.dispatch("getProds");
+    },
+    async addProduct() {
+      const product = {
+        productName: this.productName,
+        quantity: this.quantity,
+        productPrice: this.productPrice,
+        category: this.category,
+        productUrl: this.productUrl,
+      };
+
+      const products = this.getProducts || [];
+      const productID = products.length + 1;
+      product.productID = productID;
+
+      try {
+        await this.$store.dispatch("addProd", {
+          productID,
+          newProduct: product,
+        });
+        console.log("Product added successfully");
+
+        this.productName = "";
+        this.quantity = "";
+        this.productPrice = "";
+        this.category = "";
+        this.productUrl = "";
+      } catch (error) {
+        console.error("Error adding product:", error);
+      }
     },
   },
   mounted() {

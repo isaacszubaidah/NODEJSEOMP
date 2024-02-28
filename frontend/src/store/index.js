@@ -130,26 +130,31 @@ export default createStore({
         console.error("Error updating product:", error);
       }
     },
-    async addProd({ commit }, { productID, newProduct }) {
+
+    async addProd({ commit }, { newProduct }) {
       try {
-        const response = await fetch(
-          `${baseUrl}/products/${newProduct.productID}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newProduct),
-          }
-        );
+        const response = await fetch(`${baseUrl}/products`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newProduct),
+        });
+
         if (!response.ok) {
-          throw new Error("Failed to update product");
+          throw new Error("Failed to add product");
         }
-        commit("addProduct", newProduct);
+
+        const updatedProducts = await response.json();
+
+        commit("setProducts", updatedProducts);
+
+        console.log("Product added successfully");
       } catch (error) {
-        console.error("Error updating product:", error);
+        console.error("Error adding product:", error);
       }
     },
+
     async getUsers({ commit }) {
       try {
         const response = await fetch(`${baseUrl}/users`);
