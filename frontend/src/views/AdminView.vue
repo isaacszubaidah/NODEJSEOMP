@@ -1,11 +1,26 @@
 <template>
   <div class="admin-container">
-    <ProductCard></ProductCard>
+    <navbar />
+    <!-- {{products}} -->
+    <div class="products">
+      <!-- <ProductCard
+      v-for="product of getProducts"
+    :key="product.productID"
+    :product="product"
+      /> -->
+      <ProductCard />
+    </div>
+    <div class="users">
+      <UsersCard />
+    </div>
   </div>
 </template>
 
 <script>
-import ProductCard from '../components/ProductCard.vue';
+import UsersCard from "@/components/UsersCard.vue";
+import ProductCard from "@/components/ProductCard.vue";
+import navbar from "@/components/nav.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -30,7 +45,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .products {
