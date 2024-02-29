@@ -33,7 +33,7 @@ const editUser = async(firstName, lastName, userAge, userGender, emailAdd, userP
     userGender = ?, 
     emailAdd = ?, 
     userProfile = ?
-    WHERE (userID = ?)`,[firstName, lastName, userAge, userGender, emailAdd, userProfile, userID])
+    WHERE userID = ?`,[firstName, lastName, userAge, userGender, emailAdd, userProfile, userID])
     return editedUser
 }
 
