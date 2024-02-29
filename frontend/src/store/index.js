@@ -245,10 +245,11 @@ export default createStore({
           throw new Error("Failed to update user");
         }
         commit("editUser", updatedUser);
+        console.log("User updated successfully");
       } catch (error) {
         console.error("Error updating user:", error);
       }
     },
-    },
+  },
   modules: {},
 });
