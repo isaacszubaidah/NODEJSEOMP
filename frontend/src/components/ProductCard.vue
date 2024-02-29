@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>Products</h2>
+    
     <table>
       <thead>
         <tr>
@@ -15,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in getProducts" :key="product.id">
+        <tr v-for="product in getProducts" :key="product.productID">
           <td>{{ product.productID }}</td>
           <td>{{ product.productName }}</td>
           <td>{{ product.quantity }}</td>
@@ -46,7 +47,7 @@
     </table>
 
     <!-- Modals -->
-    <div v-for="product in getProducts" :key="product.id">
+    <div v-for="product in getProducts" :key="product.productID">
       <div
         class="modal fade"
         :id="'editModal' + product.productID"
@@ -108,7 +109,7 @@
               <button
                 type="button"
                 class="btn btn-primary"
-                @click="updateProduct(product)"
+                @click="updateProduct(product.productID)"
               >
                 Save changes
               </button>
@@ -124,6 +125,9 @@
 import { mapGetters } from "vuex";
 
 export default {
+  data() {
+    return {};
+  },
   computed: {
     ...mapGetters(["getProducts"]),
   },
@@ -134,9 +138,10 @@ export default {
     async delProduct(productID) {
       await this.$store.dispatch("delProduct", productID);
     },
-    async updateProduct(product) {
+    async updateProduct(productID) {
+      const product = this.getProducts.find(p => p.productID === productID);
       try {
-        await this.$store.dispatch("editProd", product);
+        await this.$store.dispatch("editProd", { productID, updatedProduct: product });
         console.log("Product updated successfully");
       } catch (error) {
         console.error("Error updating product:", error);
@@ -148,6 +153,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 table {
   width: 100%;
