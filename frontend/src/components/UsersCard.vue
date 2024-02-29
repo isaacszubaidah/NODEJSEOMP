@@ -143,7 +143,7 @@ export default {
         userProfile: "",
       },
       editedUser: null,
-      
+
     };
   },
   computed: {
@@ -160,16 +160,15 @@ export default {
       this.clearEditedUser();
     },
     async addUser() {
-      let user = {
+      const user = {
         ...this.formData,
-        userRole: "",
+        // userRole: "",
       };
       try {
-        await this.$store.dispatch("addUserDB", {
-          newUser: user,
-        });
+        await this.$store.dispatch("addUserDB", { newUser: user });
         console.log("User added successfully");
         this.clearForm();
+        await this.fetchUsers();
       } catch (error) {
         console.error("Error adding user:", error);
       }
