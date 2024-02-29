@@ -6,7 +6,7 @@ export default createStore({
   state: {
     products: null,
     product: null,
-    users: null,
+    users: [],
     user: null,
     category: null,
   },
@@ -232,9 +232,9 @@ export default createStore({
         console.error("Error deleting product:", error);
       }
     },
-    async editUser({ commit }, updatedUser) {
+    async editUser({ commit },{userID, updatedUser}) {
       try {
-        const response = await fetch(`${baseUrl}/users/${updatedUser.userID}`, {
+        const response = await fetch(`${baseUrl}/users/${userID}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
