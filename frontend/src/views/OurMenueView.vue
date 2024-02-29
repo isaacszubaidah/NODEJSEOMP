@@ -1,7 +1,8 @@
 <template>
   <div class="menu-container vh-100">
-           <Navbar :home="true"   />
-    <div class="sortfilter">
+    <Navbar :home="true" v-if="!loading" />
+    <Loader v-if="loading" />
+    <div class="sortfilter" v-else>
       <div class="sort-controls">
         <select v-model="sortBy">
           <option value="">Sort By</option>
@@ -27,18 +28,27 @@
 </template>
 
 <script>
+import Loader from "@/components/Loader.vue";
 import Navbar from "@/components/Navbar.vue";
 import Card from "@/components/Card.vue";
 export default {
   components: {
     Navbar,
     Card,
+    Loader
   },
   data() {
     return {
       searchQuery: "",
       sortBy: "", // store current sort option
+      loading: true,
     };
+    
+  },
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 3000);
   },
   computed: {
     products() {
@@ -58,7 +68,7 @@ export default {
       if (this.sortBy === "category") {
         // Sort by category
         filtered = filtered.sort((a, b) => {
-          const categoryOrder = { "Main": 1, "Starter": 2, "Dessert": 3 };
+          const categoryOrder = { Main: 1, Starter: 2, Dessert: 3 };
           return categoryOrder[a.category] - categoryOrder[b.category];
         });
       } else if (this.sortBy === "priceLowToHigh") {
@@ -91,7 +101,7 @@ export default {
   margin-bottom: 20px;
   margin-top: 100px;
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   gap: 16px;
 }
