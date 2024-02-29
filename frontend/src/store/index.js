@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import Swal from 'sweetalert2';
 
 const baseUrl = "https://nodejseomp-1.onrender.com";
 
@@ -250,6 +251,11 @@ export default createStore({
         commit("setUsers", usersInDB);
       } catch (error) {
         console.error("Error fetching users:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to fetch users. Please try again.',
+        });
       }
     },
 
