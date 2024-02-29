@@ -7,7 +7,7 @@
       data-bs-toggle="modal"
       data-bs-target="#addUsersModal"
     >
-      Add Product
+      Add User
     </button>
     <table>
       <thead>
@@ -19,7 +19,9 @@
           <th>Gender</th>
           <th>Role</th>
           <th>Email</th>
-          <th>Profile</th>
+          <th>Username</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -33,11 +35,12 @@
           <td>{{ user.emailAdd }}</td>
           <td>{{ user.userProfile }}</td>
           <td>
-            <button
-              type="button"
-              class="btn btn-dark"
-              @click="delUser(user.userID)"
-            >
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" @click="editUser(user)">
+              Edit
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-dark" @click="delUser(user.userID)">
               Delete
             </button>
           </td>
@@ -45,6 +48,7 @@
       </tbody>
     </table>
 
+    <!-- Add User Modal -->
     <div
       class="modal fade"
       id="addUsersModal"
@@ -52,95 +56,12 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form @submit.prevent="addUser">
-              <div class="mb-3">
-                <label for="firstName" class="form-label">First Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="firstName"
-                  v-model="firstName"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="lastName" class="form-label">last Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="lastName"
-                  v-model="lastName"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="userAge" class="form-label">user Age</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="userAge"
-                  v-model="userAge"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="userGender" class="form-label">user Gender</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="userGender"
-                  v-model="userGender"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="userRole" class="form-label">user Role</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="userRole"
-                  v-model="userRole"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="emailAdd" class="form-label">email</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="emailAdd"
-                  v-model="emailAdd"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="userProfile" class="form-label">userProfile</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="userProfile"
-                  v-model="userProfile"
-                  required
-                />
-              </div>
+      <!-- Modal Content -->
+    </div>
 
-              <button type="submit" class="btn btn-primary">Add</button>
-            </form>
-          </div>
-        </div>
-      </div>
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+      <!-- Modal Content -->
     </div>
   </div>
 </template>
@@ -151,58 +72,86 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      firstName: "",
-      lastName: "",
-      userAge: "",
-      userGender: "",
-      userRole: "",
-      emailAdd: "",
-      userProfile: "",
+      formData: {
+        firstName: "",
+        lastName: "",
+        userAge: "",
+        userGender: "",
+        emailAdd: "",
+        userProfile: "",
+      },
+      editedUser: null,
     };
   },
   computed: {
     ...mapGetters(["getUsers"]),
   },
   methods: {
-    async fetchUsers() {
-      await this.$store.dispatch("getUsers");
-    },
     async addUser() {
       const user = {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        userAge: this.userAge,
-        userGender: this.userGender,
-        userRole: this.userRole,
-        emailAdd: this.emailAdd,
-        userProfile: this.userProfile,
+        ...this.formData,
+        userRole: ""
       };
-
-      const users = this.getUsers || [];
-      const userID = users.length + 1;
-      user.userID = userID;
-
       try {
         await this.$store.dispatch("addUserDB", {
-          userID,
           newUser: user,
         });
-        console.log("USer added successfully");
-
-        this.firstName = "";
-        this.lastName = "";
-        this.userAge = "";
-        this.userGender = "";
-        this.userRole = "";
-        this.emailAdd = "";
-        this.userProfile = "";
+        console.log("User added successfully");
+        this.clearForm();
       } catch (error) {
-        console.error("Error adding product:", error);
+        console.error("Error adding user:", error);
       }
     },
     async delUser(userID) {
-      await this.$store.dispatch("delUser", userID);
+      try {
+        await this.$store.dispatch("delUser", userID);
+        console.log("User deleted successfully");
+      } catch (error) {
+        console.error("Error deleting user:", error);
+      }
     },
+    async fetchUsers() {
+      try {
+        await this.$store.dispatch("getUsers");
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    },
+    editUser(user) {
+      this.editedUser = user;
+      // Populate modal with user data
+      this.formData = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        userAge: user.userAge,
+        userGender: user.userGender,
+        emailAdd: user.emailAdd,
+        userProfile: user.userProfile,
+      };
+    },
+    async saveEditedUser() {
+      try {
+        await this.$store.dispatch("editUser", { userID: this.editedUser.userID, updatedUser: this.formData });
+        console.log("User updated successfully");
+        this.clearForm();
+        this.editedUser = null;
+      } catch (error) {
+        console.error("Error updating user:", error);
+      }
+    },
+    clearForm() {
+      this.formData = {
+        firstName: "",
+        lastName: "",
+        userAge: "",
+        userGender: "",
+        emailAdd: "",
+        userProfile: "",
+      };
+    },
+    clearEditedUser() {
+      this.editedUser = null;
+    }
   },
   created() {
     this.fetchUsers();

@@ -68,6 +68,14 @@ export default createStore({
     setCategory(state, category) {
       state.category = category;
     },
+    editUser(state, updatedUser) {
+      state.users = state.users.map((user) => {
+        if (user.userID === updatedUser.userID) {
+          return updatedUser;
+        }
+        return user;
+      });
+    },
   },
   actions: {
     async getProds({ commit }) {
@@ -95,7 +103,7 @@ export default createStore({
       }
     },
     async getProdCategory({ commit }, category) {
-      console.log("🚀 ~ getProdCategory ~ category:", category);
+      console.log("sending ~ getProdCategory ~ category:", category);
       try {
         const response = await fetch(`${baseUrl}/products`);
         if (!response.ok) {
@@ -108,7 +116,7 @@ export default createStore({
           return productCategory === category.toLowerCase();
         });
 
-        console.log("🚀 ~ getProdCategory ~ products:", products);
+        console.log("sending ~ getProdCategory ~ products:", products);
         commit("setCategory", products);
       } catch (error) {
         console.error("Error fetching category:", error);
@@ -130,7 +138,7 @@ export default createStore({
     async editProd({ commit }, { productID, updatedProduct }) {
       try {
         const response = await fetch(
-          `${baseUrl}/products/${productID}`, // Use productID instead of updatedProduct.productID
+          `${baseUrl}/products/${productID}`,
           {
             method: "PATCH",
             headers: {
@@ -172,7 +180,7 @@ export default createStore({
       }
     },
     async addUserDB({ commit }, { newUser }) {
-      console.log("🚀 ~ addUserDB ~ newUser:", newUser);
+      console.log("sending ~ addUserDB ~ newUser:", newUser);
       try {
         const response = await fetch(`${baseUrl}/users`, {
           method: "POST",
@@ -187,7 +195,7 @@ export default createStore({
         }
 
         const addedUser = await response.json(); 
-        console.log("🚀 ~ addUserDB ~ addedUser:", addedUser);
+        console.log("sending ~ addUserDB ~ addedUser:", addedUser);
 
         commit("setUsers", addedUser); 
 
@@ -204,7 +212,7 @@ export default createStore({
           throw new Error("Failed to fetch users");
         }
         const usersInDB = await response.json();
-        console.log("🚀 ~ getUsers ~ products:", usersInDB)
+        console.log("sending ~ getUsers ~ getUsers:", usersInDB)
         commit("setUsers", usersInDB);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -224,7 +232,23 @@ export default createStore({
         console.error("Error deleting product:", error);
       }
     },
-  
-  },
+    async editUser({ commit }, updatedUser) {
+      try {
+        const response = await fetch(`${baseUrl}/users/${updatedUser.userID}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedUser),
+        });
+        if (!response.ok) {
+          throw new Error("Failed to update user");
+        }
+        commit("editUser", updatedUser);
+      } catch (error) {
+        console.error("Error updating user:", error);
+      }
+    },
+    },
   modules: {},
 });
