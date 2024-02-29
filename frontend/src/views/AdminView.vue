@@ -167,6 +167,34 @@ export default {
 </script>
 
 <style scoped>
+.products {
+  margin-top: 7%;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1220px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 60px;
+}
+.users {
+  margin-top: 7%;
+  display: flex;
+  flex-wrap: wrap;
+
+  max-width: 1220px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 60px;
+}
 table {
   width: 100%;
   border-collapse: collapse;
@@ -190,18 +218,5 @@ tr:hover {
 img {
   width: 150px;
   height: 150px;
-}
-@media screen and (max-width: 480px) {
-  .mainProductCard {
-    display: flex;
-    justify-content: start;
-    flex-direction: column;
-    align-items: center;
-    max-width: 350px;
-    overflow-x: auto;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
 </style>
