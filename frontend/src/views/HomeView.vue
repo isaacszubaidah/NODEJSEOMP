@@ -14,7 +14,7 @@
             type="video/mp4"
           ></video>
         </div>
-        <div class="content">
+        <div class="content vh-100">
           <h1>Le Petit Italia</h1>
           <p>
             Bon Appe’tite! A <br />
@@ -135,6 +135,7 @@ a {
   }
 
   .background-video video {
+    /* height:250px ; */
     width: 400px;
   }
 
@@ -158,8 +159,8 @@ a {
     align-items: flex-start;
     margin-left: 0;
     margin-top: 8%;
-    font-weight: 300;
-    font-size: 50px;
+    font-weight: 200;
+    font-size: 30px;
     width: 100%;
     font-family: "Fraunces", serif;
     color: white;

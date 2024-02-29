@@ -65,27 +65,27 @@ p {
 
 @media (max-width: 1060px) {
   h2 {
-    margin-left: 20px;
+    margin-left: 5%;
   }
 
   .about {
-    overflow-x: hidden;
-    margin-left: 0 auto;
-    margin-right: 0 auto;
-    width: 96%;
+    width: 90%; /* Adjust as needed */
+    margin-left: 5%; /* Adjust as needed */
+    margin-right: 5%; /* Adjust as needed */
   }
+
   .img {
-    margin-left: 30px;
-    margin-top: 5%;
-    width: 100%;
+    width: 90%; /* Adjust as needed */
+    margin: 0 auto; /* Center the image in the middle */
+    display: block; /* Ensure it's treated as a block element */
+    margin-top: 5%; /* Adjust as needed */
   }
 
   p {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    margin-left: 80px;
-    width: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%; /* Adjust as needed */
   }
 }
+
 </style>
