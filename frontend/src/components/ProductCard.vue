@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="mainProductCard">
     <h2>Products</h2>
-    
+
     <table>
       <thead>
         <tr>
@@ -148,9 +148,12 @@ export default {
       await this.$store.dispatch("delProduct", productID);
     },
     async updateProduct(productID) {
-      const product = this.getProducts.find(p => p.productID === productID);
+      const product = this.getProducts.find((p) => p.productID === productID);
       try {
-        await this.$store.dispatch("editProd", { productID, updatedProduct: product });
+        await this.$store.dispatch("editProd", {
+          productID,
+          updatedProduct: product,
+        });
         console.log("Product updated successfully");
       } catch (error) {
         console.error("Error updating product:", error);
@@ -170,7 +173,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 table {
@@ -196,5 +198,18 @@ tr:hover {
 img {
   width: 150px;
   height: 150px;
+}
+@media screen and (max-width: 480px) {
+  .mainProductCard {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: center;
+    max-width: 350px;
+    overflow-x: auto;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 </style>

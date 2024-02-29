@@ -1,11 +1,10 @@
 <template>
-  <div>
+  <div class="mainUserCard">
     <h2>Users</h2>
     <button
       type="button"
       class="btn btn-primary"
-      data-bs-toggle="modal"
-      data-bs-target="#addUsersModal"
+      @click="openAddUserForm"
     >
       Add User
     </button>
@@ -35,9 +34,12 @@
           <td>{{ user.emailAdd }}</td>
           <td>{{ user.userProfile }}</td>
           <td>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="'#editMod' + user.userID">
-            Edit
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="editUserForm(user)"
+            >
+              Edit
             </button>
           </td>
           <td>
@@ -53,120 +55,76 @@
       </tbody>
     </table>
 
-    <!-- Edit User Modal -->
-    <div class="modal fade" tabindex="-1" role="dialog" v-for="user in getUsers" :key="user.userID" :id="'editMod' + user.userID">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Edit User</h5>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <input type="text" v-model="user.firstName">
-            <input type="text" v-model="user.lastName">
-            <input type="text" v-model="user.userAge">
-            <input type="text" v-model="user.userGender">
-            <input type="text" v-model="user.emailAdd">
-            <input type="text" v-model="user.userProfile">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" @click="editUser(user.userID)">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- Add User Form -->
+    <form @submit.prevent="addUser">
+  <!-- Your form inputs go here -->
+  <div>
+    <label for="firstName">First Name:</label>
+    <input v-model="formData.firstName" type="text" id="firstName" required>
+  </div>
+  <div>
+    <label for="lastName">Last Name:</label>
+    <input v-model="formData.lastName" type="text" id="lastName" required>
+  </div>
+  <div>
+    <label for="userAge">Age:</label>
+    <input v-model="formData.userAge" type="text" id="userAge" required>
+  </div>
+  <div>
+    <label for="userGender">Gender:</label>
+    <input v-model="formData.userGender" type="text" id="userGender" required>
+  </div>
+  <div>
+    <label for="userRole">Role:</label>
+    <input v-model="formData.userRole" type="text" id="userRole" required>
+  </div>
+  <div>
+    <label for="emailAdd">Email:</label>
+    <input v-model="formData.emailAdd" type="text" id="emailAdd" required>
+  </div>
+  <div>
+    <label for="userProfile">Username:</label>
+    <input v-model="formData.userProfile" type="text" id="userProfile" required>
+  </div>
 
-    <!-- Add User Modal -->
-    <div
-      class="modal fade"
-      id="addUsersModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form @submit.prevent="addUser">
-              <div class="mb-3">
-                <label for="firstName" class="form-label">First Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="firstName"
-                  v-model="formData.firstName"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="lastName" class="form-label">Last Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="lastName"
-                  v-model="formData.lastName"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="userAge" class="form-label">User Age</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="userAge"
-                  v-model="formData.userAge"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="userGender" class="form-label">User Gender</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="userGender"
-                  v-model="formData.userGender"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="emailAdd" class="form-label">Email Address</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="emailAdd"
-                  v-model="formData.emailAdd"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="userProfile" class="form-label">User Profile</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="userProfile"
-                  v-model="formData.userProfile"
-                  required
-                />
-              </div>
+  <button type="submit" class="btn btn-primary">Save User</button>
+</form>
 
-              <button type="submit" class="btn btn-primary">Add</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- Edit User Form -->
+<form v-if="editedUser" @submit.prevent="saveEditedUser">
+  <!-- Your form inputs go here -->
+  <div>
+    <label for="editFirstName">First Name:</label>
+    <input v-model="formData.firstName" type="text" id="editFirstName" required>
+  </div>
+  <div>
+    <label for="editLastName">Last Name:</label>
+    <input v-model="formData.lastName" type="text" id="editLastName" required>
+  </div>
+  <div>
+    <label for="editUserAge">Age:</label>
+    <input v-model="formData.userAge" type="text" id="editUserAge" required>
+  </div>
+  <div>
+    <label for="editUserGender">Gender:</label>
+    <input v-model="formData.userGender" type="text" id="editUserGender" required>
+  </div>
+  <div>
+    <label for="editUserRole">Role:</label>
+    <input v-model="formData.userRole" type="text" id="editUserRole" required>
+  </div>
+  <div>
+    <label for="editEmailAdd">Email:</label>
+    <input v-model="formData.emailAdd" type="text" id="editEmailAdd" required>
+  </div>
+  <div>
+    <label for="editUserProfile">Username:</label>
+    <input v-model="formData.userProfile" type="text" id="editUserProfile" required>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save Changes</button>
+  <button type="button" class="btn btn-secondary" @click="clearEditedUser">Cancel</button>
+</form>
   </div>
 </template>
 
@@ -184,16 +142,27 @@ export default {
         emailAdd: "",
         userProfile: "",
       },
+      editedUser: null,
+      
     };
   },
   computed: {
     ...mapGetters(["getUsers"]),
   },
+
+  // computed: {
+  //   ...mapGetters(["getUsers"]),
+  // },
   methods: {
+    openAddUserForm() {
+      // Clear previous data
+      this.clearForm();
+      this.clearEditedUser();
+    },
     async addUser() {
-      const user = {
+      let user = {
         ...this.formData,
-        userRole: ""
+        userRole: "",
       };
       try {
         await this.$store.dispatch("addUserDB", {
@@ -220,14 +189,43 @@ export default {
         console.error("Error fetching users:", error);
       }
     },
-    async editUser(userID) {
-      const user = this.getUsers.find(user => user.userID === userID);
+    editUserForm(user) {
+      this.editedUser = user;
+      // Populate form with user data
+      this.formData = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        userAge: user.userAge,
+        userGender: user.userGender,
+        emailAdd: user.emailAdd,
+        userProfile: user.userProfile,
+      };
+    },
+    async saveEditedUser() {
       try {
-        await this.$store.dispatch("editUser", { userID, ediedUser: user });
+        await this.$store.dispatch("editUser", {
+          userID: this.editedUser.userID,
+          updatedUser: this.formData,
+        });
         console.log("User updated successfully");
+        this.clearForm();
+        this.editedUser = null;
       } catch (error) {
         console.error("Error updating user:", error);
       }
+    },
+    clearForm() {
+      this.formData = {
+        firstName: "",
+        lastName: "",
+        userAge: "",
+        userGender: "",
+        emailAdd: "",
+        userProfile: "",
+      };
+    },
+    clearEditedUser() {
+      this.editedUser = null;
     },
   },
   created() {
@@ -235,8 +233,6 @@ export default {
   },
 };
 </script>
-
-
 
 <style scoped>
 table {
@@ -260,5 +256,19 @@ tr:hover {
 img {
   width: 150px;
   height: 150px;
+}
+
+@media screen and (max-width: 480px) {
+  .mainUserCard {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: center;
+    max-width: 350px;
+    overflow-x: auto;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 </style>

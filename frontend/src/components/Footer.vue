@@ -26,6 +26,7 @@
     align-items: center;
     max-width: 1220px;
     width: 100%;
+    position: sticky;
     margin-right: auto;
     margin-left: auto;
   }

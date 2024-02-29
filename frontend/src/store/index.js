@@ -50,15 +50,19 @@ export default createStore({
         return product;
       });
     },
+    // addUser(state, newUser) {
+    //   state.users = state.users.map((user) => {
+    //     console.log("i was here")
+    //     if (user.userID === newUser.userID) {
+    //       return newUser;
+    //     }
+    //     return user;
+    //   });
+    // },
     addUser(state, newUser) {
-      state.users = state.users.map((user) => {
-        console.log("i was here")
-        if (user.userID === newUser.userID) {
-          return newUser;
-        }
-        return user;
-      });
+      state.users = [...state.users, newUser];
     },
+    
     setProduct(state, product) {
       state.product = product;
     },
@@ -180,6 +184,31 @@ export default createStore({
         console.error("Error adding product:", error);
       }
     },
+    // async addUserDB({ commit }, { newUser }) {
+    //   console.log("sending ~ addUserDB ~ newUser:", newUser);
+    //   try {
+    //     const response = await fetch(`${baseUrl}/users`, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify(newUser),
+    //     });
+
+    //     if (!response.ok) {
+    //       throw new Error("Failed to add user");
+    //     }
+
+    //     const addedUser = await response.json(); 
+    //     console.log("sending ~ addUserDB ~ addedUser:", addedUser);
+
+    //     commit("setUsers", addedUser); 
+
+    //     console.log("User added successfully");
+    //   } catch (error) {
+    //     console.error("Error adding user:", error);
+    //   }
+    // },
     async addUserDB({ commit }, { newUser }) {
       console.log("sending ~ addUserDB ~ newUser:", newUser);
       try {
@@ -190,21 +219,25 @@ export default createStore({
           },
           body: JSON.stringify(newUser),
         });
-
+    
         if (!response.ok) {
           throw new Error("Failed to add user");
         }
-
-        const addedUser = await response.json(); 
+    
+        const addedUser = await response.json();
         console.log("sending ~ addUserDB ~ addedUser:", addedUser);
-
-        commit("setUsers", addedUser); 
-
+    
+        commit("addUser", addedUser); // Assuming "addUser" mutation adds the user to the array
+    
         console.log("User added successfully");
       } catch (error) {
         console.error("Error adding user:", error);
       }
     },
+    addUser(state, newUser) {
+      state.users.push(newUser); // Assuming "users" is an array
+    },
+    
 
     async getUsers({ commit }) {
       try {
