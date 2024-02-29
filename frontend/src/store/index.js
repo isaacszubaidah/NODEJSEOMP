@@ -70,13 +70,14 @@ export default createStore({
     },
     editUser(state, updatedUser) {
       state.users = state.users.map((user) => {
-        if (user.userID === updatedUser.userID) {
+        if (user && updatedUser && user.userID === updatedUser.userID) {
           return updatedUser;
         }
         return user;
       });
     },
-  },
+    
+    },
   actions: {
     async getProds({ commit }) {
       try {
