@@ -4,54 +4,46 @@ import cors from 'cors';
 import mysql from 'mysql2';
 import bcrypt from 'bcrypt';
 import cookieParser from 'cookie-parser';
-import { addOne, eUser, editOne, getAll, getOne, prodAdd} from './controller/controller.js';
-import UserRouter from './routes/user.js'
+import { addOne, eUser, editOne, getAll, getOne, prodAdd } from './controller/controller.js';
+import UserRouter from './routes/user.js';
 
-config() 
+config();
 
-const pool = mysql.createPool({
-    host:process.env.HOST,
-    user:process.env.USER,
-    password:process.env.PASSWORD,
-    database:process.env.DATABASE
-}).promise()
+const app = express();
+const PORT = process.env.PORT 
 
+app.use(express.json());
+app.use(express.static('public'));
+app.use(cookieParser());
 
-const PORT = process.env.PORT;
-
-const app = express()
-
-app.use(cors({}))
 
 const corsOptions = {
-  origin: 'http://localhost:8080',
+  origin: ['http://localhost:8080', 'https://nodejseomp-1.onrender.com'],
   methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://nodejseomp-1.onrender.com");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "POST, GET, PATCH, DELETE");
-    next();
-});
 
 app.use(cors(corsOptions));
 
-app.use(express.json())
 
-app.use(express.static('public'))
+// Use your routers
+app.use(UserRouter);
 
-app.use(cookieParser())
+app.post('/login', (req, res) => {
+  res.send({
+    msg: "YAY! You have logged in."
+  });
+});
 
-app.use(UserRouter) 
+// Create MySQL connection pool
+const pool = mysql.createPool({
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE
+}).promise();
 
-app.post('/login',(req,res)=>{
-    res.send({
-        msg: "YAY! You have logged in."
-    })
-})
-
-
-app.listen(PORT,()=>{
-    console.log(`It is running on http://localhost:${PORT}`);
-}); 
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
