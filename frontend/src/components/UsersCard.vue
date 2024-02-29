@@ -178,6 +178,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 import { mapGetters } from "vuex";
 
 export default {
@@ -259,7 +260,13 @@ export default {
         this.editedUser = null;
       } catch (error) {
         console.error("Error updating user:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to update user. Please try again.',
+        });
       }
+      
     },
     clearForm() {
       this.formData = {
