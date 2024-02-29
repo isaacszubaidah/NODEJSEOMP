@@ -26,7 +26,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
-// Use your routers
 app.use(UserRouter);
 
 app.post('/login', (req, res) => {
