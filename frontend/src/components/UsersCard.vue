@@ -1,13 +1,60 @@
 <template>
   <div class="mainUserCard">
     <h2>Users</h2>
-    <button
-      type="button"
-      class="btn btn-primary"
-      @click="openAddUserForm"
-    >
+    <button type="button" class="btn btn-primary" @click="openAddUserForm">
       Add User
     </button>
+    <!-- Add User Form -->
+    <form @submit.prevent="addUser" class="addUseForm">
+      <!-- Your form inputs go here -->
+      <div class="addUseForm-inputs">
+        <label for="firstName">First Name:</label>
+        <input
+          v-model="formData.firstName"
+          type="text"
+          id="firstName"
+          required
+        />
+      </div>
+      <div class="addUseForm-inputs">
+        <label for="lastName">Last Name:</label>
+        <input v-model="formData.lastName" type="text" id="lastName" required />
+      </div>
+      <div class="addUseForm-inputs">
+        <label for="userAge">Age:</label>
+        <input v-model="formData.userAge" type="text" id="userAge" required />
+      </div>
+      <div class="addUseForm-inputs">
+        <label for="userGender">Gender:</label>
+        <input
+          v-model="formData.userGender"
+          type="text"
+          id="userGender"
+          required
+        />
+      </div>
+      <div class="addUseForm-inputs">
+        <label for="userRole">Role:</label>
+        <input v-model="formData.userRole" type="text" id="userRole" required />
+      </div>
+      <div class="addUseForm-inputs">
+        <label for="emailAdd">Email:</label>
+        <input v-model="formData.emailAdd" type="text" id="emailAdd" required />
+      </div>
+      <div class="addUseForm-inputs">
+        <label for="userProfile">Username:</label>
+        <input
+          v-model="formData.userProfile"
+          type="text"
+          id="userProfile"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary addUseForm-save">
+        Save
+      </button>
+    </form>
     <table>
       <thead>
         <tr>
@@ -55,76 +102,78 @@
       </tbody>
     </table>
 
-    <!-- Add User Form -->
-    <form @submit.prevent="addUser">
-  <!-- Your form inputs go here -->
-  <div>
-    <label for="firstName">First Name:</label>
-    <input v-model="formData.firstName" type="text" id="firstName" required>
-  </div>
-  <div>
-    <label for="lastName">Last Name:</label>
-    <input v-model="formData.lastName" type="text" id="lastName" required>
-  </div>
-  <div>
-    <label for="userAge">Age:</label>
-    <input v-model="formData.userAge" type="text" id="userAge" required>
-  </div>
-  <div>
-    <label for="userGender">Gender:</label>
-    <input v-model="formData.userGender" type="text" id="userGender" required>
-  </div>
-  <div>
-    <label for="userRole">Role:</label>
-    <input v-model="formData.userRole" type="text" id="userRole" required>
-  </div>
-  <div>
-    <label for="emailAdd">Email:</label>
-    <input v-model="formData.emailAdd" type="text" id="emailAdd" required>
-  </div>
-  <div>
-    <label for="userProfile">Username:</label>
-    <input v-model="formData.userProfile" type="text" id="userProfile" required>
-  </div>
+    <!-- Edit User Form -->
+    <form v-if="editedUser" @submit.prevent="saveEditedUser">
+      <!-- Your form inputs go here -->
+      <div>
+        <label for="editFirstName">First Name:</label>
+        <input
+          v-model="formData.firstName"
+          type="text"
+          id="editFirstName"
+          required
+        />
+      </div>
+      <div>
+        <label for="editLastName">Last Name:</label>
+        <input
+          v-model="formData.lastName"
+          type="text"
+          id="editLastName"
+          required
+        />
+      </div>
+      <div>
+        <label for="editUserAge">Age:</label>
+        <input
+          v-model="formData.userAge"
+          type="text"
+          id="editUserAge"
+          required
+        />
+      </div>
+      <div>
+        <label for="editUserGender">Gender:</label>
+        <input
+          v-model="formData.userGender"
+          type="text"
+          id="editUserGender"
+          required
+        />
+      </div>
+      <div>
+        <label for="editUserRole">Role:</label>
+        <input
+          v-model="formData.userRole"
+          type="text"
+          id="editUserRole"
+          required
+        />
+      </div>
+      <div>
+        <label for="editEmailAdd">Email:</label>
+        <input
+          v-model="formData.emailAdd"
+          type="text"
+          id="editEmailAdd"
+          required
+        />
+      </div>
+      <div>
+        <label for="editUserProfile">Username:</label>
+        <input
+          v-model="formData.userProfile"
+          type="text"
+          id="editUserProfile"
+          required
+        />
+      </div>
 
-  <button type="submit" class="btn btn-primary">Save User</button>
-</form>
-
-<!-- Edit User Form -->
-<form v-if="editedUser" @submit.prevent="saveEditedUser">
-  <!-- Your form inputs go here -->
-  <div>
-    <label for="editFirstName">First Name:</label>
-    <input v-model="formData.firstName" type="text" id="editFirstName" required>
-  </div>
-  <div>
-    <label for="editLastName">Last Name:</label>
-    <input v-model="formData.lastName" type="text" id="editLastName" required>
-  </div>
-  <div>
-    <label for="editUserAge">Age:</label>
-    <input v-model="formData.userAge" type="text" id="editUserAge" required>
-  </div>
-  <div>
-    <label for="editUserGender">Gender:</label>
-    <input v-model="formData.userGender" type="text" id="editUserGender" required>
-  </div>
-  <div>
-    <label for="editUserRole">Role:</label>
-    <input v-model="formData.userRole" type="text" id="editUserRole" required>
-  </div>
-  <div>
-    <label for="editEmailAdd">Email:</label>
-    <input v-model="formData.emailAdd" type="text" id="editEmailAdd" required>
-  </div>
-  <div>
-    <label for="editUserProfile">Username:</label>
-    <input v-model="formData.userProfile" type="text" id="editUserProfile" required>
-  </div>
-
-  <button type="submit" class="btn btn-primary">Save Changes</button>
-  <button type="button" class="btn btn-secondary" @click="clearEditedUser">Cancel</button>
-</form>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+      <button type="button" class="btn btn-secondary" @click="clearEditedUser">
+        Cancel
+      </button>
+    </form>
   </div>
 </template>
 
@@ -143,7 +192,6 @@ export default {
         userProfile: "",
       },
       editedUser: null,
-
     };
   },
   computed: {
@@ -269,5 +317,46 @@ img {
     margin-left: auto;
     margin-right: auto;
   }
+  .addUseForm {
+    display: flex;
+    flex-direction: column;
+    /* max-width: 600px;s */
+    width: 0px !important;
+    margin-right: auto;
+    margin-left: auto;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+  }
+  .addUseForm-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 200px !important;
+  }
+}
+
+.addUseForm {
+  display: flex;
+  /* max-width: 600px;s */
+  width: 600px;
+  margin-right: auto;
+  margin-left: auto;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+.addUseForm-inputs {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+}
+
+.addUseForm-save {
+  width: 80px;
+  height: 40px;
+  margin-top: 7px;
 }
 </style>
