@@ -12,6 +12,7 @@
           <th>Category</th>
           <th>Product Image</th>
           <th>Edit</th>
+          <th>Add</th>
           <th>Delete</th>
         </tr>
       </thead>
@@ -33,6 +34,7 @@
               Edit
             </button>
           </td>
+          <td></td>
           <td>
             <button
               type="button"
@@ -55,8 +57,10 @@
         aria-labelledby="'editModalLabel' + product.productID"
         aria-hidden="true"
       >
+        <!-- Edit Modal content -->
         <div class="modal-dialog">
           <div class="modal-content">
+            <!-- Edit Modal header -->
             <div class="modal-header">
               <h5
                 class="modal-title"
@@ -71,7 +75,9 @@
                 aria-label="Close"
               ></button>
             </div>
+            <!-- Edit Modal body -->
             <div class="modal-body">
+              <!-- Edit Modal inputs -->
               <input
                 type="text"
                 v-model="product.productName"
@@ -98,6 +104,7 @@
                 placeholder="Image URL"
               />
             </div>
+            <!-- Edit Modal footer -->
             <div class="modal-footer">
               <button
                 type="button"
@@ -117,6 +124,8 @@
           </div>
         </div>
       </div>
+
+      <!-- Add Modal -->
     </div>
   </div>
 </template>
@@ -147,12 +156,21 @@ export default {
         console.error("Error updating product:", error);
       }
     },
+    async newProduct(product) {
+      try {
+        await this.$store.dispatch("addProd", product);
+        console.log("Product added successfully");
+      } catch (error) {
+        console.error("Error adding product:", error);
+      }
+    },
   },
   created() {
     this.fetchProducts();
   },
 };
 </script>
+
 
 <style scoped>
 table {

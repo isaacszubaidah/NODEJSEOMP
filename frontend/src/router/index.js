@@ -2,10 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
 import OurMenueView from "../views/OurMenueView.vue";
-import ReservationView from "../views/ReservationView.vue";
 import AdminView from "../views/AdminView.vue";
 import ContactView from "../views/ContactView.vue";
 import ProductView from "../views/ProductView.vue";
+import MenuView from "../views/MenuView.vue";
 
 const routes = [
   {
@@ -24,9 +24,9 @@ const routes = [
     component: OurMenueView,
   },
   {
-    path: "/reservation",
-    name: "reservation",
-    component: ReservationView,
+    path: "/product-menue/:category",
+    name: "product-menue",
+    component: MenuView,
   },
   {
     path: "/admin",

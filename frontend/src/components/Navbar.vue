@@ -1,6 +1,8 @@
 <template>
   <div class="navbar">
-    <div><img class="logo" src="https://i.imgur.com/zkMo7Zp.png" alt="" /></div>
+    <router-link to="/"
+      ><img class="logo" src="https://i.imgur.com/zkMo7Zp.png" alt=""
+    /></router-link>
     <div class="menu-toggle" @click="toggleMenu">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -9,7 +11,7 @@
         height="24"
         viewBox="0 0 24 24"
         stroke-width="1.5"
-        stroke="white"
+        stroke="#311D00"
         fill="none"
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -21,31 +23,61 @@
       </svg>
     </div>
     <div class="router-links" :class="{ 'show-menu': isMenuOpen }">
-      <router-link class="link" to="/">Home</router-link>
-      <span>|</span>
-      <router-link class="link" to="/about">About</router-link>
-      <span>|</span>
+      <router-link
+        class="link"
+        :style="{ color: home ? 'black' : 'white' }"
+        to="/"
+        >Home</router-link
+      >
+      <!-- Apply color based on prop -->
+      <span :style="{ color: home ? 'black' : 'white' }">|</span>
+      <router-link
+        class="link"
+        :style="{ color: home ? 'black' : 'white' }"
+        to="/about"
+        >About</router-link
+      >
+      <span :style="{ color: home ? 'black' : 'white' }">|</span>
       <div class="dropdown">
-        <router-link class="link" to="/menue">Our Menu</router-link>
+        <router-link
+          class="link"
+          :style="{ color: home ? 'black' : 'white' }"
+          to="/menue"
+          >Our Menu</router-link
+        >
 
         <div class="dropdown-content">
-          <router-link class="dropdown-item" to="/menue">Starters</router-link>
-          <router-link class="dropdown-item" to="/menue">Main</router-link>
-          <router-link class="dropdown-item" to="/menue">Dessert</router-link>
+          <a class="dropdown-item" href="/product-menue/Starter">Starters</a>
+          <a class="dropdown-item" href="/product-menue/Main">Main</a>
+          <a class="dropdown-item" href="/product-menue/Dessert">Dessert</a>
         </div>
       </div>
-      <span>|</span>
-      <router-link class="link" to="/reservation">Reservation</router-link>
-      <span>|</span>
-      <router-link class="link" to="/admin">Admin</router-link>
-      <span>|</span>
-      <router-link class="link" to="/contact">Contact</router-link>
+      <span :style="{ color: home ? 'black' : 'white' }">|</span>
+      <router-link
+        class="link"
+        :style="{ color: home ? 'black' : 'white' }"
+        to="/admin"
+        >Admin</router-link
+      >
+      <span :style="{ color: home ? 'black' : 'white' }">|</span>
+      <router-link
+        class="link"
+        :style="{ color: home ? 'black' : 'white' }"
+        to="/contact"
+        >Contact</router-link
+      >
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    home: {
+      required: false,
+      default: false,
+    },
+  },
   data() {
     return {
       isMenuOpen: false,
@@ -58,7 +90,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 * {
   font-family: 'Alegreya", serif';
@@ -80,10 +111,30 @@ span {
   left: 0;
   top: 0;
   padding-left: 16px;
-  padding-right: 16px;
+  padding-right: 60px;
   z-index: 99;
 }
+.menu-toggle {
+  display: flex;
+  cursor: pointer;
+}
 
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 120px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  top: 100%;
+}
+
+.dropdown-item {
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+}
 .menu-toggle {
   display: none;
 }
@@ -97,6 +148,10 @@ span {
   position: relative;
 }
 
+.dropdown {
+  position: relative;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -104,6 +159,7 @@ span {
   min-width: 120px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 999;
+  top: 100%; /* Position below the dropdown */
 }
 
 .dropdown:hover .dropdown-content {
@@ -118,8 +174,14 @@ span {
 
 .link {
   font-size: 18px;
-  color: white;
   text-decoration: none;
+}
+
+.white {
+  color: white;
+}
+.white {
+  color: black;
 }
 
 @media (max-width: 768px) {
@@ -159,6 +221,12 @@ span {
     border-radius: 100%;
     width: 40px;
     height: 40px;
+  }
+
+  .link {
+    font-size: 18px;
+    text-decoration: none;
+    color: black !important;
   }
 }
 </style>

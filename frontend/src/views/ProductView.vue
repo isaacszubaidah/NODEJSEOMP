@@ -1,23 +1,26 @@
 <template>
   <div>
+    <Navbar :home="true" />
     <div v-for="product in getProduct" :key="product.id">
       <div class="container">
         <img :src="product.productUrl" alt="" />
         <p class="text">{{ product.productName }}</p>
         <p class="text">R{{ product.productPrice }}</p>
         <button class="view">
-            <router-link class="type" to="/menue"
-              >Order Now</router-link
-            >
-          </button>
+          <router-link class="type" to="/menue">Order Now</router-link>
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Navbar from "@/components/Navbar.vue";
 import { mapGetters } from "vuex";
 export default {
+  components: {
+    Navbar,
+  },
   computed: {
     ...mapGetters(["getProduct"]),
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="vh-100">
-    <navbar />
+         <Navbar :home="true"   />
     <div class="contact">
       <div>
         <h1 class="header">Keep In Touch</h1>
@@ -87,9 +87,9 @@
 </template>
 
 <script>
-import navbar from "@/components/nav.vue";
+import Navbar from "@/components/Navbar.vue";
 export default {
-  components: { navbar },
+  components: { Navbar },
   data() {
     return {
       formData: {
@@ -154,7 +154,7 @@ export default {
 <style scoped>
 .contact{
   overflow: hidden;
-  margin-top: 7%;
+  margin-top: 5%;
 }
 .loader {
   width: 20px;
@@ -281,7 +281,7 @@ p {
   width: 200px;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 1060px) {
   .bigger {
     display: flex;
     justify-content: center;

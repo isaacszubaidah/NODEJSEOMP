@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="home">
-      <Navbar v-if="!loading" />
+
+         <Navbar :home="false" v-if="!loading"  /> 
       <spinner v-if="loading" />
       <div class="something" v-else>
         <div class="background-video">
@@ -20,7 +21,7 @@
             French <br />
             experience awaits you.
           </p>
-          <button><a href="/menue">See More</a></button>
+          <button class="button"><router-link to="/menue">See More</router-link></button>
         </div>
       </div>
     </div>
@@ -51,7 +52,7 @@ export default {
 <style scoped>
 .home {
   background-color: black;
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -105,7 +106,7 @@ p {
   font-family: "Fraunces", serif;
   color: white;
 }
-button {
+.button {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -123,13 +124,14 @@ a {
   font-family: "Fraunces", serif;
 }
 
-@media screen and (max-width: 1060px) {
+@media  (max-width: 1060px) {
   .home {
     padding-top: 10px;
     background-color: black;
     height: 100%;
     display: flex;
     align-items: center;
+    overflow-x: hidden;
   }
 
   .background-video video {
@@ -163,7 +165,7 @@ a {
     color: white;
   }
   p {
-    margin-top: 7%;
+    margin-top: 3%;
     margin-left: 0;
     width: 100%;
     font-weight: 100;
@@ -171,16 +173,17 @@ a {
     font-family: "Fraunces", serif;
     color: white;
   }
-  button {
+
+  .button {
     display: flex;
     margin-left: 0;
     width: 60%;
     align-items: flex-start;
     justify-content: center;
     border: 2px white solid;
-    margin-top: 15%;
+    margin-top: 10%;
     background-color: black;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 }
 </style>

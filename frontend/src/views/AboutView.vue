@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-     <navbar/> 
+      <Navbar :home="true" /> 
     <div class="about col-6">
       <h2>Good Food Alley</h2>
       <p>
@@ -21,23 +21,23 @@
       </div>
     </div>
     <div class="img col-6">
-     <img src="https://i.imgur.com/fXczMAK.png" alt="">
+      <img src="https://i.imgur.com/fXczMAK.png" alt="" />
     </div>
   </div>
 </template>
 
 <script>
- import navbar from "@/components/nav.vue";
+import Navbar from "@/components/Navbar.vue";
 export default {
-   components: {
-     navbar,
+  components: {
+    Navbar,
   },
 };
 </script>
 
 <style scoped>
 .row {
-   margin-top: 10%;
+  margin-top: 10%;
 }
 h2 {
   margin-left: 100px;
@@ -61,5 +61,31 @@ p {
   font-weight: 300;
   font-family: "Fraunces", serif;
   color: black;
+}
+
+@media (max-width: 1060px) {
+  h2 {
+    margin-left: 20px;
+  }
+
+  .about {
+    overflow-x: hidden;
+    margin-left: 0 auto;
+    margin-right: 0 auto;
+    width: 96%;
+  }
+  .img {
+    margin-left: 30px;
+    margin-top: 5%;
+    width: 100%;
+  }
+
+  p {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 80px;
+    width: 100%;
+  }
 }
 </style>

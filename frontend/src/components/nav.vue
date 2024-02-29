@@ -35,22 +35,22 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Our Menue
+              Our Menue  
             </router-link>
             <ul class="dropdown-menu bg-light">
               <li>
-                <router-link class="dropdown-item" to="/menue"
-                  >Starters</router-link
+                <a  class="dropdown-item" href="/product-menue/Starter"
+                  >Starters</a
                 >
               </li>
               <li>
-                <router-link class="dropdown-item" to="/menue"
-                  >Main</router-link
+                <a class="dropdown-item" href="/product-menue/Main"
+                  >Main</a
                 >
               </li>
               <li>
-                <router-link class="dropdown-item" to="/menue"
-                  >Dessert</router-link
+                <a class="dropdown-item" href="/product-menue/Dessert"
+                  >Dessert</a
                 >
               </li>
             </ul>
@@ -59,16 +59,8 @@
             <router-link
               class="nav-link active"
               aria-curent="page"
-              to="/reservation"
-              >| Reservations |</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <router-link
-              class="nav-link active"
-              aria-curent="page"
               to="/admin"
-              > Admin |</router-link
+              >|  Admin |</router-link
             >
           </li>
           <li class="nav-item">
@@ -86,7 +78,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+
+};
 </script>
 
 <style scoped>
@@ -103,6 +97,7 @@ nav {
   align-items: center;
   margin-right: auto;
   margin-left: auto;
+  background: white !important;
 }
 .nav-item .nav-link.active {
   font-size: 18px;
