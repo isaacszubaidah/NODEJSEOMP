@@ -34,7 +34,6 @@ app.post('/login', (req, res) => {
   });
 });
 
-// Create MySQL connection pool
 const pool = mysql.createPool({
   host: process.env.HOST,
   user: process.env.USER,
@@ -42,7 +41,7 @@ const pool = mysql.createPool({
   database: process.env.DATABASE
 }).promise();
 
-// Start the server
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
