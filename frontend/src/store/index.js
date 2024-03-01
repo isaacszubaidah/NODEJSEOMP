@@ -47,6 +47,7 @@ export default createStore({
       state.products = state.products.map((product) => {
         if (product.productID === newProduct.productID) {
           return newProduct;
+          window.location.reload()
         }
         return product;
       });
@@ -225,7 +226,7 @@ export default createStore({
           throw new Error("Failed to add user");
         }
     
-        const addedUser = await response.json();
+        let addedUser = await response.json();
         console.log("sending ~ addUserDB ~ addedUser:", addedUser);
     
         commit("addUser", addedUser); // Assuming "addUser" mutation adds the user to the array
@@ -289,6 +290,7 @@ export default createStore({
       } catch (error) {
         console.error("Error updating user:", error);
       }
+      window.location.reload()
     },
   },
   modules: {},
