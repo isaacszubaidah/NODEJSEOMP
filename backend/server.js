@@ -20,7 +20,7 @@ const PORT = process.env.PORT;
 const app = express()
 
 app.use(cors({
-    origin: ['http://localhost:8080', 'https://nodejseomp-1.onrender.com'],
+    origin: ['http://localhost:8080','https://nodejseomp-5aae1.firebaseapp.com/', 'https://nodejseomp-1.onrender.com'],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
